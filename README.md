@@ -1,193 +1,304 @@
-# Sistema Completo de Controle de Saúde
+# 🏥 MedControl Personal - Sistema Completo de Gestão em Saúde
 
-Um sistema web completo e personalizado para gerenciar todos os aspectos da sua saúde: exames médicos, medicamentos, vacinação e consultas odontológicas.
+![MedControl Personal](https://img.shields.io/badge/Amazon%20Q%20Developer-Quest%20TDC%202025-orange)
+![Status](https://img.shields.io/badge/Status-Completo-green)
+![Acessibilidade](https://img.shields.io/badge/Acessibilidade-WCAG%202.1%20AA-blue)
 
-## 🚀 Funcionalidades Principais
+## 📋 Qual problema inspirou a ideia
 
-### 📊 Dashboard
-- **Visão geral** com estatísticas de todos os módulos
-- **Exames recentes** e próximos
-- **Medicamentos ativos** com alertas de horários
-- **Alertas** para exames urgentes e vacinas atrasadas
+A gestão pessoal da saúde é um desafio constante para muitas pessoas. Informações médicas ficam espalhadas em diferentes locais: receitas médicas em gavetas, cartões de vacina perdidos, lembretes de medicamentos esquecidos, e a dificuldade de acompanhar a saúde de toda a família em um só lugar.
 
-### 🔬 Exames Médicos
-- ✅ Adicionar/editar/excluir exames
-- 🔍 Buscar e filtrar por nome, médico, status ou tipo
-- 📋 Categorização por tipos (Sangue, Imagem, Cardiológico, etc.)
-- 📅 Controle de status (Agendado, Realizado, Cancelado)
+**Problemas identificados:**
+- 📄 Documentos médicos desorganizados
+- 💊 Esquecimento de horários de medicamentos
+- 📅 Perda de consultas e exames agendados
+- 👨‍👩‍👧‍👦 Dificuldade em gerenciar a saúde familiar
+- ♿ Falta de acessibilidade em sistemas de saúde
+- 📱 Ausência de soluções offline e gratuitas
 
-### 💊 Controle de Medicamentos
-- 📝 Cadastro completo de medicamentos
-- ⏰ Controle de horários e frequência
-- 🔔 Alertas para próximas doses
-- 📊 Visualização de medicamentos ativos
-- ✅ Registro de doses tomadas
-- 🏥 Controle por médico responsável
+## 🚀 Como a solução foi construída
 
-### 💉 Controle de Vacinação
-- 📋 Histórico completo de vacinas
-- 📅 Controle de doses e reforços
-- 🏥 Registro de local e lote
-- ⚠️ Alertas para vacinas atrasadas
-- 📊 Estatísticas de vacinação
+O **MedControl Personal** foi desenvolvido inteiramente com o **Amazon Q Developer**, utilizando prompts inteligentes para criar um sistema completo e acessível de gestão em saúde.
 
-### 🦷 Controle Odontológico
-- 📝 Histórico de consultas e procedimentos
-- 💰 Controle de custos
-- 📅 Agendamento de retornos
-- 🔍 Busca por tipo de procedimento
-- 📊 Visão geral dos tratamentos
-
-### 📅 Calendário Integrado
-- Visualização unificada de todos os compromissos
-- Exames, consultas odontológicas e vacinas
-- Navegação mensal intuitiva
-
-### 📈 Relatórios Avançados
-- 📊 Gráficos de exames por tipo e mês
-- 💾 Exportação completa de todos os dados
-- 📋 Análises estatísticas
-
-## 🛠️ Tecnologias Utilizadas
-
-- **HTML5** - Estrutura semântica e acessível
-- **CSS3** - Design responsivo e moderno
-- **JavaScript** - Funcionalidades interativas avançadas
-- **Chart.js** - Gráficos e visualizações
-- **Font Awesome** - Ícones profissionais
+### 🛠️ Tecnologias Utilizadas
+- **HTML5** - Estrutura semântica
+- **CSS3** - Design responsivo com gradientes
+- **JavaScript** - Funcionalidades interativas
 - **LocalStorage** - Armazenamento local seguro
+- **Web Speech API** - Síntese e reconhecimento de voz
+- **Font Awesome** - Ícones profissionais
 
-## 📱 Design Responsivo
+### 🎯 Funcionalidades Implementadas
 
-O sistema é totalmente responsivo e funciona perfeitamente em:
-- 💻 Desktop (1200px+)
-- 📱 Tablets (768px - 1199px)
-- 📱 Smartphones (até 767px)
+#### 📊 **Dashboard Inteligente**
+- Visão geral com estatísticas em tempo real
+- Ações rápidas para todas as funcionalidades
+- Atividades recentes organizadas
 
-## 🎨 Características do Design
+#### 🔬 **Controle de Exames**
+- Cadastro completo de exames médicos
+- Agendamento com lembretes
+- Status: Agendado, Realizado, Cancelado
+- Filtros por médico, data e tipo
 
-- **Interface moderna** com gradientes e animações
-- **Cores intuitivas** para diferentes status e tipos
-- **Cards interativos** para medicamentos ativos
-- **Tabelas responsivas** com filtros avançados
-- **Modais otimizados** para entrada de dados
-- **Acessibilidade** considerada em todos os componentes
+#### 💊 **Gerenciamento de Medicamentos**
+- Controle de dosagens e horários
+- Alertas para próximas doses
+- Histórico completo por médico
 
-## 📋 Como Usar
+#### 💉 **Controle de Vacinação**
+- Histórico pessoal de vacinas
+- Calendário vacinal por idade
+- Vacinas internacionais por país
+- Certificados obrigatórios
 
-### 1. Abrir o Sistema
-Abra o arquivo `index.html` em qualquer navegador moderno.
+#### 🦷 **Consultas Odontológicas**
+- Registro de procedimentos
+- Controle de custos
+- Histórico de tratamentos
 
-### 2. Gerenciar Exames
-1. Vá para a aba "Exames"
-2. Clique em "Adicionar Exame"
-3. Preencha os dados necessários
-4. Use filtros para organizar e buscar
+#### 🧠 **Saúde Mental**
+- Registro diário de humor
+- Sessões de terapia
+- Dicas de bem-estar com áudio
 
-### 3. Controlar Medicamentos
-1. Acesse a aba "Medicamentos"
-2. Adicione medicamentos com dosagem e horários
-3. Marque doses como tomadas
-4. Visualize medicamentos ativos em cards especiais
+#### 🍎 **Nutrição e Alimentação**
+- Diário alimentar completo
+- Controle de consumo de água
+- 16 dicas nutricionais detalhadas
 
-### 4. Gerenciar Vacinas
-1. Na aba "Vacinação"
-2. Registre vacinas aplicadas
-3. Agende próximas doses
-4. Acompanhe estatísticas
+#### 👨‍👩‍👧‍👦 **Saúde da Família**
+- Cadastro de membros da família
+- Marcos de desenvolvimento infantil
+- Contatos de emergência
 
-### 5. Consultas Odontológicas
-1. Aba "Dentista"
-2. Registre procedimentos e custos
-3. Agende retornos
-4. Acompanhe tratamentos ativos
+### ♿ **Versão Acessível com IA**
 
-### 6. Visualizar Calendário
-- Veja todos os compromissos em uma visão mensal
-- Navegue entre meses
-- Identifique dias com múltiplos compromissos
+Uma versão completamente acessível foi desenvolvida com recursos avançados:
 
-### 7. Acessar Relatórios
-- Visualize gráficos estatísticos
-- Exporte todos os dados em JSON
-- Analise tendências de saúde
+#### 🤖 **IA de Acessibilidade**
+- **Painel de controle** com 6 modos de acessibilidade
+- **Alto contraste** para baixa visão
+- **Texto grande** (120% do tamanho normal)
+- **Leitor de tela** com leitura automática
+- **Navegação por teclado** aprimorada
+- **Redução de movimento** para sensibilidade
+- **Modo daltonismo** com filtros especiais
 
-## 💾 Armazenamento de Dados
+#### 🎤 **Assistente de Voz Inteligente**
+- **Reconhecimento de voz** em português
+- **Comandos de navegação**: "dashboard", "exames", "medicamentos"
+- **Comandos de ação**: "adicionar exame", "beber água"
+- **Comandos de acessibilidade**: "alto contraste", "texto grande"
+- **Síntese de voz** com vozes neurais premium
 
-- **LocalStorage** para persistência local
-- **Backup automático** a cada alteração
-- **Exportação completa** em formato JSON
-- **Dados seguros** apenas no seu dispositivo
+#### 🎯 **Conformidade WCAG 2.1 AA**
+- **ARIA labels** completos
+- **Navegação por teclado** 100%
+- **Screen readers** compatíveis
+- **Contraste mínimo** 4.5:1
+- **Área de toque** mínima 44px
 
-## 🔧 Personalização Avançada
+## 📸 Screenshot do Projeto
 
-### Adicionar Novos Tipos
-Edite as funções de label nos arquivos JavaScript:
-- `getTypeLabel()` para exames
-- `getVaccineTypeLabel()` para vacinas
-- `getDentalTypeLabel()` para procedimentos
+![MedControl Personal Dashboard](screenshot-dashboard.png)
+*Dashboard principal com estatísticas e ações rápidas*
 
-### Modificar Frequências de Medicamentos
-Ajuste o objeto `frequencyHours` na função `calculateNextDose()`.
+![MedControl Personal Acessível](screenshot-acessivel.png)
+*Versão acessível com controles de IA*
 
-### Personalizar Cores
-Modifique as variáveis CSS no arquivo `styles.css`.
+## 🏃‍♂️ Instruções para rodar
 
-## 📊 Funcionalidades Avançadas
+### 📋 **Pré-requisitos**
+- Navegador moderno (Chrome, Firefox, Safari, Edge)
+- Nenhuma instalação adicional necessária
 
-### Alertas Inteligentes
-- **Medicamentos**: Próximas doses e horários perdidos
-- **Vacinas**: Doses atrasadas e reforços necessários
-- **Exames**: Compromissos urgentes (próximos 7 dias)
+### 🚀 **Execução**
 
-### Filtros Avançados
-- Busca textual em múltiplos campos
-- Filtros por status, tipo e data
-- Combinação de múltiplos filtros
+1. **Clone o repositório:**
+```bash
+git clone https://github.com/Ana-macos/medcontrol-personal-.git
+cd medcontrol-personal-
+```
 
-### Estatísticas em Tempo Real
-- Contadores automáticos no dashboard
-- Gráficos atualizados dinamicamente
-- Indicadores visuais de status
+2. **Abra o arquivo principal:**
+```bash
+# Versão padrão
+open index.html
 
-## 🚀 Melhorias Futuras Planejadas
+# Versão acessível
+open index-acessivel.html
+```
 
-- 🔔 Notificações push do navegador
-- 📧 Lembretes por email
-- 🏥 Integração com APIs médicas
-- 📱 PWA (Progressive Web App)
-- 🔐 Sistema de login e múltiplos usuários
-- ☁️ Sincronização na nuvem
-- 📋 Relatórios em PDF
-- 🔍 Busca avançada com filtros complexos
+3. **Ou acesse diretamente:**
+- Abra `index.html` no seu navegador
+- Para versão acessível: `index-acessivel.html`
 
-## 📞 Suporte e Customização
+### 🔐 **Login de Demonstração**
+- **Usuário:** `admin` | **Senha:** `admin123`
+- **Usuário:** `demo` | **Senha:** `demo123`
+- **Ou clique em:** "Acessar Demonstração"
 
-Este sistema foi desenvolvido para ser:
-- **Facilmente customizável**
-- **Extensível** com novas funcionalidades
-- **Adaptável** às suas necessidades específicas
+### 🎤 **Recursos de Voz (Versão Acessível)**
+- Clique no ícone de acessibilidade (canto superior direito)
+- Ative "Leitor de Tela" para leitura automática
+- Clique no microfone (canto inferior direito) para comandos de voz
+- Diga "ajuda" para ver todos os comandos disponíveis
 
-## 🔒 Privacidade e Segurança
+## 📝 Lista de Prompts Utilizados com Amazon Q Developer
 
-- **Dados locais**: Informações ficam apenas no seu dispositivo
-- **Sem servidor**: Não há transmissão de dados pessoais
-- **Controle total**: Você tem controle completo dos seus dados
-- **Backup manual**: Exporte quando quiser
+### 🏗️ **Estrutura Base**
+1. "Crie um sistema completo de controle de saúde pessoal com HTML, CSS e JavaScript"
+2. "Adicione um sistema de login seguro com múltiplos usuários"
+3. "Implemente armazenamento local com localStorage para persistência de dados"
 
-## 📄 Licença
+### 🎨 **Interface e Design**
+4. "Crie um design moderno e responsivo com gradientes e animações suaves"
+5. "Adicione ícones do Font Awesome e organize em cards interativos"
+6. "Implemente navegação por abas com sidebar e layout profissional"
 
-Este projeto é de uso livre para fins pessoais e educacionais.
+### 📊 **Dashboard e Estatísticas**
+7. "Crie um dashboard com estatísticas em tempo real e ações rápidas"
+8. "Adicione seção de atividades recentes com timestamps"
+9. "Implemente cards clicáveis que navegam para seções específicas"
+
+### 🔬 **Módulos de Saúde**
+10. "Implemente controle completo de exames médicos com status e agendamentos"
+11. "Adicione gerenciamento de medicamentos com dosagens e horários"
+12. "Crie sistema de controle de vacinação com calendário por idade"
+13. "Implemente consultas odontológicas com controle de custos"
+
+### 🧠 **Saúde Mental e Bem-estar**
+14. "Adicione módulo de saúde mental com registro de humor diário"
+15. "Crie seção de dicas de bem-estar com cards informativos"
+16. "Implemente registro de sessões de terapia"
+
+### 🍎 **Nutrição e Alimentação**
+17. "Crie módulo de nutrição com diário alimentar completo"
+18. "Adicione controle de consumo de água com barra de progresso"
+19. "Implemente 16 dicas nutricionais detalhadas com informações científicas"
+
+### 👨‍👩‍👧‍👦 **Saúde da Família**
+20. "Adicione controle de saúde familiar com cadastro de membros"
+21. "Implemente marcos de desenvolvimento infantil"
+22. "Crie sistema de contatos de emergência organizados"
+
+### ♿ **Acessibilidade Avançada**
+23. "Crie uma versão completamente acessível do sistema"
+24. "Implemente IA de acessibilidade com 6 modos diferentes"
+25. "Adicione síntese de voz com Web Speech API"
+26. "Implemente reconhecimento de voz para comandos inteligentes"
+27. "Adicione navegação por teclado com ARIA labels completos"
+28. "Crie sistema de alto contraste e texto grande"
+
+### 🎤 **Recursos de Voz**
+29. "Implemente assistente de voz com comandos em português"
+30. "Adicione leitura automática de elementos focados"
+31. "Crie sistema de anúncios para screen readers"
+32. "Implemente seleção inteligente de vozes neurais"
+
+### 🎯 **Otimizações e Melhorias**
+33. "Otimize o código para performance e acessibilidade"
+34. "Adicione tratamento de erros e validações"
+35. "Implemente feedback visual e sonoro para todas as ações"
+36. "Crie sistema de preferências salvas no localStorage"
+
+### 📱 **Responsividade**
+37. "Torne todo o sistema responsivo para mobile, tablet e desktop"
+38. "Ajuste botões para área mínima de toque de 44px"
+39. "Implemente layout adaptável com breakpoints"
+
+### 🔧 **Funcionalidades Avançadas**
+40. "Adicione modais acessíveis com trap focus"
+41. "Implemente atalhos de teclado (Alt+1-5)"
+42. "Crie sistema de alertas com diferentes tipos"
+43. "Adicione detecção automática de preferências do usuário"
+
+## 🔮 Próximos passos
+
+### 📱 **Versão Mobile (PWA)**
+- [ ] Transformar em Progressive Web App
+- [ ] Notificações push para lembretes
+- [ ] Instalação offline completa
+- [ ] Sincronização em background
+
+### ☁️ **Integração Cloud**
+- [ ] Backup automático na AWS S3
+- [ ] Sincronização entre dispositivos
+- [ ] API REST com AWS Lambda
+- [ ] Banco de dados DynamoDB
+
+### 🤖 **IA Avançada**
+- [ ] Análise preditiva de saúde
+- [ ] Recomendações personalizadas
+- [ ] Chatbot médico com Amazon Bedrock
+- [ ] Reconhecimento de imagem para receitas
+
+### 🏥 **Integrações Médicas**
+- [ ] Integração com APIs de laboratórios
+- [ ] Conexão com sistemas hospitalares
+- [ ] Importação de dados do SUS
+- [ ] Telemedicina integrada
+
+### 📊 **Analytics e Relatórios**
+- [ ] Relatórios em PDF
+- [ ] Gráficos avançados com Chart.js
+- [ ] Exportação para médicos
+- [ ] Análise de tendências de saúde
+
+### 🔐 **Segurança Avançada**
+- [ ] Criptografia end-to-end
+- [ ] Autenticação biométrica
+- [ ] Compliance LGPD/HIPAA
+- [ ] Auditoria de acessos
+
+### 🌍 **Acessibilidade Global**
+- [ ] Suporte a múltiplos idiomas
+- [ ] Vozes em diferentes idiomas
+- [ ] Adaptação cultural de dicas
+- [ ] Conformidade internacional (WCAG 2.2)
 
 ---
 
-**Desenvolvido com ❤️ para cuidar da sua saúde de forma completa e organizada**
+## 🏆 Etapas do Q Developer Quest TDC 2025
 
-### 🎯 Principais Benefícios
+### ✅ **Etapa 1: Bolsinha AWS**
+- [x] Projeto gerado com Amazon Q Developer
+- [x] Projeto público no GitHub
+- [x] Tag `q-developer-quest-tdc-2025`
+- [x] README.md completo
+- [x] Screenshots do projeto
+- [x] Lista de prompts utilizados
 
-✅ **Organização Total** - Todos os dados de saúde em um só lugar  
-✅ **Lembretes Automáticos** - Nunca mais esqueça medicamentos ou consultas  
-✅ **Histórico Completo** - Acompanhe sua evolução ao longo do tempo  
-✅ **Interface Intuitiva** - Fácil de usar para todas as idades  
-✅ **Dados Seguros** - Privacidade garantida com armazenamento local  
-✅ **Multiplataforma** - Funciona em qualquer dispositivo com navegador
+### 🔄 **Etapa 2: Mochilinha AWS** (Em desenvolvimento)
+- [x] Tudo da Etapa 1
+- [ ] Diagrama de arquitetura
+- [ ] Testes automatizados
+
+### 🔄 **Etapa 3: Garrafa + Toalha AWS** (Planejado)
+- [ ] Tudo das Etapas 1 & 2
+- [ ] Servidor MCP
+- [ ] Configuração Amazon Q Developer
+- [ ] IaC para deploy AWS
+
+### 🔄 **Etapa 4: Camiseta Capivara AWS** (Planejado)
+- [ ] Tudo das Etapas 1, 2 & 3
+- [ ] Estimativa de custos AWS
+
+---
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para o **Q Developer Quest TDC 2025** e está disponível sob licença MIT para fins educacionais e de demonstração.
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Este projeto foi criado com Amazon Q Developer e pode ser expandido com novas funcionalidades.
+
+## 📞 Contato
+
+Desenvolvido com ❤️ e **Amazon Q Developer** para o TDC São Paulo 2025.
+
+---
+
+**🎯 Tags:** `q-developer-quest-tdc-2025` `amazon-q-developer` `healthcare` `accessibility` `pwa` `javascript`
