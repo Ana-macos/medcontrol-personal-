@@ -53,25 +53,14 @@ graph TB
         APIS --> STORAGE_API
         APIS --> NOTIFY
     end
-
+    
     %% Conexões principais
     UI -.-> LOGIC
     LOGIC -.-> STORAGE
     LOGIC -.-> APIS
     STYLES -.-> UI
     
-    %% Estilos das camadas
-    classDef presentation fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
-    classDef logic fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
-    classDef style fill:#e8f5e8,stroke:#388e3c,stroke-width:3px
-    classDef data fill:#fff3e0,stroke:#f57c00,stroke-width:3px
-    classDef integration fill:#fce4ec,stroke:#c2185b,stroke-width:3px
-    
-    class UI,MAIN,ACCESS presentation
-    class LOGIC,STANDARD,AI logic
-    class STYLES,CSS1,CSS2 style
-    class STORAGE,LS data
-    class APIS,SPEECH,STORAGE_API,NOTIFY integration
+
 ```
 
 ## 🏗️ Arquitetura Detalhada por Módulos
