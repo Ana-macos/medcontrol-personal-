@@ -1,0 +1,17 @@
+{
+  "name": "medcontrol-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server para MedControl Personal - Gestão de Saúde",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": ["mcp", "health", "medical", "accessibility"],
+  "author": "Ana-macos",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  }
+}
