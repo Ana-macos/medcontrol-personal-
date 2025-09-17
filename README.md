@@ -107,6 +107,28 @@ Uma versão completamente acessível foi desenvolvida com recursos avançados:
 ![MedControl Personal Acessível](screenshot-acessivel.png)
 *Versão acessível com controles de IA*
 
+## 🏗️ Arquitetura do Sistema
+
+Veja o diagrama completo de arquitetura em [ARCHITECTURE.md](ARCHITECTURE.md)
+
+```mermaid
+graph TB
+    A[Frontend SPA] --> B[JavaScript Logic]
+    B --> C[LocalStorage]
+    B --> D[Web APIs]
+    A --> E[Accessibility Layer]
+    E --> F[Speech Synthesis]
+    E --> G[Voice Recognition]
+    
+    classDef frontend fill:#e1f5fe
+    classDef logic fill:#f3e5f5
+    classDef storage fill:#e8f5e8
+    
+    class A frontend
+    class B,E logic
+    class C,D,F,G storage
+```
+
 ## 🏃‍♂️ Instruções para rodar
 
 ### 📋 **Pré-requisitos**
@@ -272,7 +294,7 @@ open index-acessivel.html
 
 ### 🔄 **Etapa 2: Mochilinha AWS** (Em desenvolvimento)
 - [x] Tudo da Etapa 1
-- [ ] Diagrama de arquitetura
+- [x] Diagrama de arquitetura (Mermaid)
 - [ ] Testes automatizados
 
 ### 🔄 **Etapa 3: Garrafa + Toalha AWS** (Planejado)
