@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedControl Personal Acessível - Sistema Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles-acessivel.css">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <!-- Controles de Acessibilidade IA -->
+    <div id="accessibility-controls" class="accessibility-panel" role="region" aria-label="Controles de acessibilidade">
+        <button id="toggle-accessibility" class="accessibility-toggle" aria-label="Abrir painel de acessibilidade">
+            <i class="fas fa-universal-access" aria-hidden="true"></i>
+        </button>
+        <div id="accessibility-menu" class="accessibility-menu" aria-hidden="true">
+            <h3>Acessibilidade IA</h3>
+            <div class="accessibility-options">
+                <button onclick="toggleHighContrast()" aria-pressed="false" id="contrast-btn">
+                    <i class="fas fa-adjust" aria-hidden="true"></i> Alto Contraste
+                </button>
+                <button onclick="toggleLargeText()" aria-pressed="false" id="text-btn">
+                    <i class="fas fa-text-height" aria-hidden="true"></i> Texto Grande
+                </button>
+                <button onclick="toggleScreenReader()" aria-pressed="false" id="reader-btn">
+                    <i class="fas fa-volume-up" aria-hidden="true"></i> Leitor de Tela
+                </button>
+                <button onclick="toggleKeyboardNav()" aria-pressed="false" id="keyboard-btn">
+                    <i class="fas fa-keyboard" aria-hidden="true"></i> Navegação por Teclado
+                </button>
+                <button onclick="toggleMotionReduction()" aria-pressed="false" id="motion-btn">
+                    <i class="fas fa-pause" aria-hidden="true"></i> Reduzir Movimento
+                </button>
+                <button onclick="toggleColorBlind()" aria-pressed="false" id="color-btn">
+                    <i class="fas fa-eye" aria-hidden="true"></i> Daltonismo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Assistente IA de Voz -->
+    <div id="voice-assistant" class="voice-assistant" role="region" aria-label="Assistente de voz">
+        <button id="voice-toggle" class="voice-toggle" aria-label="Ativar assistente de voz">
+            <i class="fas fa-microphone" aria-hidden="true"></i>
+        </button>
+        <div id="voice-status" class="voice-status" aria-live="polite"></div>
+    </div>
+    
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                </div>
+                <h1>MedControl Personal Acessível</h1>
+                <p>Sistema Pessoal de Gestão em Saúde com Acessibilidade Total</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                        <label for="username" class="sr-only">Nome de usuário</label>
+                        <input type="text" id="username" placeholder="Nome de usuário" required aria-describedby="username-help">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon" aria-hidden="true"></i>
+                        <label for="password" class="sr-only">Senha</label>
+                        <input type="password" id="password" placeholder="Senha" required aria-describedby="password-help">
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">Entrar</span>
+                    <i class="fas fa-arrow-right btn-icon" aria-hidden="true"></i>
+                </button>
+                
+                <button type="button" class="demo-btn" onclick="loginAsDemo()">
+                    <i class="fas fa-play" aria-hidden="true"></i>
+                    Acessar Demonstração
+                </button>
+            </form>
+            
+            <div class="info" id="username-help">
+                <strong>Dados para teste:</strong><br>
+                Usuário: admin | Senha: admin123<br>
+                Usuário: demo | Senha: demo123
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Principal -->
+    <div id="main-system" class="main-system">
+        <header role="banner">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-logo">
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>MedControl Personal Acessível</h1>
+                        <p>Sistema Pessoal de Gestão em Saúde</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-badge">
+                        <div class="user-avatar">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                        </div>
+                        <span id="user-name">Usuário</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()" aria-label="Sair do sistema">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <nav class="sidebar" role="navigation" aria-label="Menu principal">
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('dashboard')" aria-pressed="true">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('exames')" aria-pressed="false">
+                        <i class="fas fa-file-medical-alt" aria-hidden="true"></i>
+                        <span>Exames</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('medicamentos')" aria-pressed="false">
+                        <i class="fas fa-pills" aria-hidden="true"></i>
+                        <span>Medicamentos</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('vacinas')" aria-pressed="false">
+                        <i class="fas fa-syringe" aria-hidden="true"></i>
+                        <span>Vacinas</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('dentista')" aria-pressed="false">
+                        <i class="fas fa-tooth" aria-hidden="true"></i>
+                        <span>Dentista</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('saude-mental')" aria-pressed="false">
+                        <i class="fas fa-brain" aria-hidden="true"></i>
+                        <span>Saúde Mental</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('nutricao')" aria-pressed="false">
+                        <i class="fas fa-apple-alt" aria-hidden="true"></i>
+                        <span>Nutrição</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('familia')" aria-pressed="false">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                        <span>Saúde da Família</span>
+                    </button>
+                </div>
+            </nav>
+
+            <main class="content" id="main-content" role="main">
+                <!-- Dashboard -->
+                <section id="dashboard" class="tab-content active" aria-labelledby="dashboard-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="dashboard-title">Dashboard</h2>
+                            <p>Visão geral da sua saúde</p>
+                        </div>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>🎉 Bem-vindo ao MedControl Personal Acessível!</h3>
+                        <p>Seu sistema pessoal de gestão em saúde com total acessibilidade está funcionando perfeitamente!</p>
+                        <div class="quick-actions" role="group" aria-label="Ações rápidas">
+                            <button class="quick-btn" onclick="openModal('exame-modal')" aria-describedby="quick-exame-desc">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                <span>Adicionar<br>Exame</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('medicamento-modal')" aria-describedby="quick-med-desc">
+                                <i class="fas fa-pills" aria-hidden="true"></i>
+                                <span>Novo<br>Medicamento</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('vacina-modal')" aria-describedby="quick-vacina-desc">
+                                <i class="fas fa-syringe" aria-hidden="true"></i>
+                                <span>Registrar<br>Vacina</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('refeicao-modal')" aria-describedby="quick-refeicao-desc">
+                                <i class="fas fa-utensils" aria-hidden="true"></i>
+                                <span>Registrar<br>Refeição</span>
+                            </button>
+                            <button class="quick-btn" onclick="addWater(250)" aria-describedby="quick-agua-desc">
+                                <i class="fas fa-tint" aria-hidden="true"></i>
+                                <span>Beber<br>Água</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('humor-modal')" aria-describedby="quick-humor-desc">
+                                <i class="fas fa-smile" aria-hidden="true"></i>
+                                <span>Registrar<br>Humor</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Descrições ocultas para screen readers -->
+                        <div class="sr-only">
+                            <div id="quick-exame-desc">Adicionar um novo exame médico ao sistema</div>
+                            <div id="quick-med-desc">Cadastrar um novo medicamento</div>
+                            <div id="quick-vacina-desc">Registrar uma nova vacina aplicada</div>
+                            <div id="quick-refeicao-desc">Registrar uma refeição no diário alimentar</div>
+                            <div id="quick-agua-desc">Adicionar 250ml ao controle de água diário</div>
+                            <div id="quick-humor-desc">Registrar seu humor atual</div>
+                        </div>
+                    </div>
+                    
+                    <section class="recent-activities" aria-labelledby="recent-title">
+                        <h3 id="recent-title">📅 Atividades Recentes</h3>
+                        <div id="recent-list" class="recent-items" role="list"></div>
+                    </section>
+                    
+                    <section class="stats-grid" role="group" aria-label="Estatísticas de saúde">
+                        <div class="stat-card" onclick="showTab('exames')" role="button" tabindex="0" aria-label="Ver exames cadastrados">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-medical-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-exames">0</h3>
+                                <p>Exames Cadastrados</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('medicamentos')" role="button" tabindex="0" aria-label="Ver medicamentos ativos">
+                            <div class="stat-icon">
+                                <i class="fas fa-pills" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-medicamentos">0</h3>
+                                <p>Medicamentos Ativos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="goToVacinas()" role="button" tabindex="0" aria-label="Ver vacinas aplicadas">
+                            <div class="stat-icon">
+                                <i class="fas fa-syringe" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-vacinas">0</h3>
+                                <p>Vacinas Aplicadas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('dentista')" role="button" tabindex="0" aria-label="Ver consultas odontológicas">
+                            <div class="stat-icon">
+                                <i class="fas fa-tooth" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-dentista">0</h3>
+                                <p>Consultas Odontológicas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('saude-mental')" role="button" tabindex="0" aria-label="Ver registros de humor">
+                            <div class="stat-icon">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-humor">0</h3>
+                                <p>Registros de Humor</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('nutricao')" role="button" tabindex="0" aria-label="Ver refeições registradas">
+                            <div class="stat-icon">
+                                <i class="fas fa-apple-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-refeicoes">0</h3>
+                                <p>Refeições Registradas</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- Saúde Mental com Dicas Acessíveis -->
+                <section id="saude-mental" class="tab-content" aria-labelledby="saude-mental-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="saude-mental-title">Saúde Mental</h2>
+                            <p>Acompanhe seu bem-estar emocional</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('humor-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Registrar Humor
+                        </button>
+                    </div>
+                    
+                    <div class="mental-health-tabs" role="tablist">
+                        <button class="mental-tab-btn active" onclick="showMentalTab('humor')" role="tab" aria-selected="true" aria-controls="humor-diario">Humor Diário</button>
+                        <button class="mental-tab-btn" onclick="showMentalTab('terapia')" role="tab" aria-selected="false" aria-controls="terapia-sessoes">Terapia</button>
+                        <button class="mental-tab-btn" onclick="showMentalTab('dicas')" role="tab" aria-selected="false" aria-controls="dicas-bem-estar">Dicas de Bem-estar</button>
+                    </div>
+                    
+                    <div id="humor-diario" class="mental-content active" role="tabpanel">
+                        <div id="humor-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="terapia-sessoes" class="mental-content" role="tabpanel">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('terapia-modal')">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Registrar Sessão
+                            </button>
+                        </div>
+                        <div id="terapia-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="dicas-bem-estar" class="mental-content" role="tabpanel">
+                        <div class="wellness-tips">
+                            <article class="tip-card" tabindex="0">
+                                <h3>🧘 Meditação e Mindfulness</h3>
+                                <p>Pratique 10-15 minutos diários de meditação. Use aplicativos com áudio-descrição ou meditações guiadas para reduzir estresse e ansiedade.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('meditation')" aria-label="Ouvir dica sobre meditação">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🏃 Exercícios Adaptados</h3>
+                                <p>Atividade física regular melhora o humor. Adapte exercícios às suas necessidades: caminhada, natação, yoga em cadeira ou exercícios de respiração.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('exercise')" aria-label="Ouvir dica sobre exercícios">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>📝 Registro de Emoções</h3>
+                                <p>Escreva ou grave áudios sobre seus sentimentos. Use tecnologias assistivas como ditado por voz para processar emoções e pensamentos.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('journaling')" aria-label="Ouvir dica sobre registro emocional">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>😴 Higiene do Sono</h3>
+                                <p>Durma 7-8 horas por noite. Crie rotinas acessíveis: alarmes vibratórios, ambiente escuro, temperatura adequada e evite telas antes de dormir.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('sleep')" aria-label="Ouvir dica sobre sono">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🤝 Conexões Sociais</h3>
+                                <p>Mantenha contato com amigos e família. Use videochamadas, mensagens de voz ou encontros presenciais adaptados às suas necessidades.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('social')" aria-label="Ouvir dica sobre conexões sociais">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🌬️ Técnicas de Respiração</h3>
+                                <p>Pratique respiração profunda: inspire por 4 segundos, segure por 4, expire por 6. Use aplicativos com feedback tátil ou sonoro para guiar o ritmo.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('breathing')" aria-label="Ouvir dica sobre respiração">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🌳 Contato com a Natureza</h3>
+                                <p>Passe tempo ao ar livre ou perto de plantas. Use os sentidos: ouça pássaros, sinta texturas de folhas, respire ar fresco para reduzir estresse.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('nature')" aria-label="Ouvir dica sobre natureza">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>⏰ Rotinas Estruturadas</h3>
+                                <p>Crie rotinas diárias previsíveis. Use lembretes sonoros, visuais ou táteis para manter consistência e redução da ansiedade.</p>
+                                <button class="tip-audio-btn" onclick="speakWellnessTip('routine')" aria-label="Ouvir dica sobre rotinas">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exames -->
+                <section id="exames" class="tab-content" aria-labelledby="exames-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="exames-title">Controle de Exames</h2>
+                            <p>Gerencie seus exames médicos</p>
+                        </div>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn-primary" onclick="openModal('exame-modal')">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Adicionar Exame
+                            </button>
+                            <button class="btn-primary" onclick="openModal('agendamento-modal')">
+                                <i class="fas fa-calendar-plus" aria-hidden="true"></i>
+                                Agendar Exame
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exam-tabs" role="tablist">
+                        <button class="exam-tab-btn active" onclick="showExamTab('realizados')" role="tab" aria-selected="true">Exames Realizados</button>
+                        <button class="exam-tab-btn" onclick="showExamTab('agendados')" role="tab" aria-selected="false">Exames Agendados</button>
+                    </div>
+                    
+                    <div id="exames-realizados" class="exam-content active" role="tabpanel">
+                        <div id="exames-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="exames-agendados" class="exam-content" role="tabpanel">
+                        <div id="agendamentos-list" class="exams-container"></div>
+                    </div>
+                </section>
+
+                <!-- Medicamentos -->
+                <section id="medicamentos" class="tab-content" aria-labelledby="medicamentos-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="medicamentos-title">Controle de Medicamentos</h2>
+                            <p>Gerencie seus medicamentos e horários</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('medicamento-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Adicionar Medicamento
+                        </button>
+                    </div>
+                    
+                    <div id="medicamentos-list" class="exams-container"></div>
+                </section>
+
+                <!-- Vacinas -->
+                <section id="vacinas" class="tab-content" aria-labelledby="vacinas-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="vacinas-title">Controle de Vacinação</h2>
+                            <p>Acompanhe seu histórico de vacinas</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('vacina-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Adicionar Vacina
+                        </button>
+                    </div>
+                    
+                    <div class="vaccine-tabs" role="tablist">
+                        <button class="vaccine-tab-btn active" onclick="showVaccineTab('minhas')" role="tab" aria-selected="true">Minhas Vacinas</button>
+                        <button class="vaccine-tab-btn" onclick="showVaccineTab('calendario')" role="tab" aria-selected="false">Calendário Vacinal</button>
+                        <button class="vaccine-tab-btn" onclick="showVaccineTab('internacionais')" role="tab" aria-selected="false">Vacinas Internacionais</button>
+                    </div>
+                    
+                    <div id="minhas-vacinas" class="vaccine-content active" role="tabpanel">
+                        <div id="vacinas-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="calendario-vacinal" class="vaccine-content" role="tabpanel">
+                        <div class="age-groups">
+                            <article class="age-group">
+                                <h3>👶 Recém-nascidos (0-2 meses)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">BCG - Tuberculose</div>
+                                    <div class="vaccine-item">Hepatite B (1ª dose)</div>
+                                </div>
+                            </article>
+                            
+                            <article class="age-group">
+                                <h3>👶 Bebês (2-6 meses)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">Pentavalente (DTP+Hib+HepB) - 1ª, 2ª e 3ª doses</div>
+                                    <div class="vaccine-item">VIP (Poliomielite inativada) - 1ª, 2ª e 3ª doses</div>
+                                    <div class="vaccine-item">Pneumocócica 10V - 1ª e 2ª doses</div>
+                                    <div class="vaccine-item">Rotavírus - 1ª e 2ª doses</div>
+                                    <div class="vaccine-item">Meningocócica C - 1ª e 2ª doses</div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    
+                    <div id="vacinas-internacionais" class="vaccine-content" role="tabpanel">
+                        <div class="country-search">
+                            <h3>🔍 Consultar Vacinas por País</h3>
+                            <div class="search-container">
+                                <label for="country-search" class="sr-only">Digite o nome do país</label>
+                                <input type="text" id="country-search" placeholder="Digite o nome do país..." oninput="searchCountryVaccines()" aria-describedby="search-help">
+                                <div id="search-help" class="sr-only">Digite o nome de um país para ver as vacinas obrigatórias</div>
+                                <div id="vaccine-results" class="vaccine-results" role="region" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dentista -->
+                <section id="dentista" class="tab-content" aria-labelledby="dentista-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="dentista-title">Controle Odontológico</h2>
+                            <p>Gerencie suas consultas dentárias</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('dentista-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Adicionar Consulta
+                        </button>
+                    </div>
+                    
+                    <div id="dentista-list" class="exams-container"></div>
+                </section>
+
+                <!-- Nutrição -->
+                <section id="nutricao" class="tab-content" aria-labelledby="nutricao-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="nutricao-title">Nutrição & Alimentação Saudável</h2>
+                            <p>Acompanhe sua alimentação e hábitos nutricionais</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('refeicao-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Registrar Refeição
+                        </button>
+                    </div>
+                    
+                    <div class="nutrition-tabs" role="tablist">
+                        <button class="nutrition-tab-btn active" onclick="showNutritionTab('diario')" role="tab" aria-selected="true">Diário Alimentar</button>
+                        <button class="nutrition-tab-btn" onclick="showNutritionTab('agua')" role="tab" aria-selected="false">Controle de Água</button>
+                        <button class="nutrition-tab-btn" onclick="showNutritionTab('dicas')" role="tab" aria-selected="false">Dicas Nutricionais</button>
+                    </div>
+                    
+                    <div id="diario-alimentar" class="nutrition-content active" role="tabpanel">
+                        <div id="refeicoes-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="controle-agua" class="nutrition-content" role="tabpanel">
+                        <div class="water-tracker">
+                            <div class="water-goal">
+                                <h3>💧 Meta Diária: 2L</h3>
+                                <div class="water-progress">
+                                    <div class="water-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do consumo de água">
+                                        <div id="water-fill" class="water-fill"></div>
+                                    </div>
+                                    <span id="water-amount" aria-live="polite">0ml / 2000ml</span>
+                                </div>
+                                <div class="water-buttons">
+                                    <button class="water-btn" onclick="addWater(250)" aria-describedby="water-250-desc">+250ml</button>
+                                    <button class="water-btn" onclick="addWater(500)" aria-describedby="water-500-desc">+500ml</button>
+                                    <button class="water-btn" onclick="resetWater()" aria-describedby="water-reset-desc">Reset</button>
+                                </div>
+                                <div class="sr-only">
+                                    <div id="water-250-desc">Adicionar 250 mililitros ao consumo diário de água</div>
+                                    <div id="water-500-desc">Adicionar 500 mililitros ao consumo diário de água</div>
+                                    <div id="water-reset-desc">Resetar contador de água para zero</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="dicas-nutricionais" class="nutrition-content" role="tabpanel">
+                        <div class="nutrition-tips">
+                            <article class="tip-card" tabindex="0">
+                                <h3>🍎 5 Porções de Frutas e Vegetais</h3>
+                                <p>Consuma pelo menos 5 porções coloridas por dia. Varie as cores: verde (brócolis), laranja (cenoura), roxo (berinjela) para diferentes nutrientes.</p>
+                                <button class="tip-audio-btn" onclick="speakNutritionTip('frutas')" aria-label="Ouvir dica sobre frutas e vegetais">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🍞 Cereais Integrais</h3>
+                                <p>Substitua refinados por integrais: arroz integral, aveia, quinoa, pão integral. Ricos em fibras, vitaminas B e minerais.</p>
+                                <button class="tip-audio-btn" onclick="speakNutritionTip('cereais')" aria-label="Ouvir dica sobre cereais integrais">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                            <article class="tip-card" tabindex="0">
+                                <h3>🐟 Proteínas Magras</h3>
+                                <p>Inclua peixes (2x/semana), frango sem pele, ovos, leguminosas (feijão, lentilha), tofu e castanhas na sua dieta.</p>
+                                <button class="tip-audio-btn" onclick="speakNutritionTip('proteinas')" aria-label="Ouvir dica sobre proteínas">
+                                    <i class="fas fa-volume-up" aria-hidden="true"></i> Ouvir
+                                </button>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Saúde da Família -->
+                <section id="familia" class="tab-content" aria-labelledby="familia-title">
+                    <div class="page-header">
+                        <div>
+                            <h2 id="familia-title">Saúde da Família & Desenvolvimento</h2>
+                            <p>Acompanhe a saúde e desenvolvimento de toda a família</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('membro-modal')">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            Adicionar Membro
+                        </button>
+                    </div>
+                    
+                    <div class="family-tabs" role="tablist">
+                        <button class="family-tab-btn active" onclick="showFamilyTab('membros')" role="tab" aria-selected="true">Membros da Família</button>
+                        <button class="family-tab-btn" onclick="showFamilyTab('desenvolvimento')" role="tab" aria-selected="false">Desenvolvimento Infantil</button>
+                        <button class="family-tab-btn" onclick="showFamilyTab('emergencia')" role="tab" aria-selected="false">Contatos de Emergência</button>
+                    </div>
+                    
+                    <div id="membros-familia" class="family-content active" role="tabpanel">
+                        <div id="membros-list" class="family-members"></div>
+                    </div>
+                    
+                    <div id="desenvolvimento-infantil" class="family-content" role="tabpanel">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('marco-modal')">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Registrar Marco
+                            </button>
+                        </div>
+                        <div id="marcos-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="contatos-emergencia" class="family-content" role="tabpanel">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('contato-modal')">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Adicionar Contato
+                            </button>
+                        </div>
+                        <div id="contatos-list" class="emergency-contacts"></div>
+                    </div>
+                </section>
+                
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals Acessíveis -->
+    <div id="exame-modal" class="modal" role="dialog" aria-labelledby="exame-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="exame-modal-title">Adicionar Exame</h3>
+                <button class="close" onclick="closeModal('exame-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="exame-form">
+                <div class="form-group">
+                    <label for="exame-nome">Nome do Exame</label>
+                    <input type="text" id="exame-nome" required aria-describedby="exame-nome-help">
+                    <div id="exame-nome-help" class="sr-only">Digite o nome completo do exame médico</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exame-data">Data</label>
+                        <input type="date" id="exame-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exame-status">Status</label>
+                        <select id="exame-status">
+                            <option value="agendado">Agendado</option>
+                            <option value="realizado">Realizado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exame-medico">Médico</label>
+                    <input type="text" id="exame-medico">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('exame-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Exame</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="medicamento-modal" class="modal" role="dialog" aria-labelledby="medicamento-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="medicamento-modal-title">Adicionar Medicamento</h3>
+                <button class="close" onclick="closeModal('medicamento-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="medicamento-form">
+                <div class="form-group">
+                    <label for="med-nome">Nome do Medicamento</label>
+                    <input type="text" id="med-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="med-dosagem">Dosagem</label>
+                        <input type="text" id="med-dosagem" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="med-frequencia">Frequência</label>
+                        <input type="text" id="med-frequencia" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="med-medico">Médico</label>
+                    <input type="text" id="med-medico">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('medicamento-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Medicamento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="vacina-modal" class="modal" role="dialog" aria-labelledby="vacina-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="vacina-modal-title">Adicionar Vacina</h3>
+                <button class="close" onclick="closeModal('vacina-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="vacina-form">
+                <div class="form-group">
+                    <label for="vacina-nome">Nome da Vacina</label>
+                    <input type="text" id="vacina-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vacina-data">Data</label>
+                        <input type="date" id="vacina-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vacina-local">Local</label>
+                        <input type="text" id="vacina-local" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vacina-proxima">Próxima Dose</label>
+                    <input type="date" id="vacina-proxima">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('vacina-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Vacina</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dentista-modal" class="modal" role="dialog" aria-labelledby="dentista-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="dentista-modal-title">Adicionar Consulta Odontológica</h3>
+                <button class="close" onclick="closeModal('dentista-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="dentista-form">
+                <div class="form-group">
+                    <label for="dentista-procedimento">Procedimento</label>
+                    <input type="text" id="dentista-procedimento" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dentista-data">Data</label>
+                        <input type="date" id="dentista-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dentista-custo">Custo</label>
+                        <input type="number" id="dentista-custo" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dentista-nome">Dentista</label>
+                    <input type="text" id="dentista-nome">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('dentista-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Consulta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="refeicao-modal" class="modal" role="dialog" aria-labelledby="refeicao-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="refeicao-modal-title">Registrar Refeição</h3>
+                <button class="close" onclick="closeModal('refeicao-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="refeicao-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="refeicao-tipo">Tipo de Refeição</label>
+                        <select id="refeicao-tipo" required>
+                            <option value="">Selecione...</option>
+                            <option value="cafe-manha">Café da Manhã</option>
+                            <option value="lanche-manha">Lanche da Manhã</option>
+                            <option value="almoco">Almoço</option>
+                            <option value="lanche-tarde">Lanche da Tarde</option>
+                            <option value="jantar">Jantar</option>
+                            <option value="ceia">Ceia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="refeicao-horario">Horário</label>
+                        <input type="time" id="refeicao-horario" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="refeicao-alimentos">Alimentos Consumidos</label>
+                    <textarea id="refeicao-alimentos" rows="3" placeholder="Descreva os alimentos consumidos..." required></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('refeicao-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="humor-modal" class="modal" role="dialog" aria-labelledby="humor-modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="humor-modal-title">Registrar Humor</h3>
+                <button class="close" onclick="closeModal('humor-modal')" aria-label="Fechar modal">&times;</button>
+            </div>
+            <form id="humor-form">
+                <div class="form-group">
+                    <label for="humor-nivel">Como você está se sentindo?</label>
+                    <select id="humor-nivel" required>
+                        <option value="">Selecione...</option>
+                        <option value="muito-bem">😄 Muito Bem</option>
+                        <option value="bem">😊 Bem</option>
+                        <option value="neutro">😐 Neutro</option>
+                        <option value="mal">🙁 Mal</option>
+                        <option value="muito-mal">😢 Muito Mal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="humor-observacoes">Observações</label>
+                    <textarea id="humor-observacoes" rows="3" placeholder="Como foi seu dia? O que influenciou seu humor?"></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('humor-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script-acessivel.js"></script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+/* Importando estilos base */
+@import url('styles.css');
+
+/* Melhorias específicas de acessibilidade */
+
+/* Skip link para navegação por teclado */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-blue);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Melhor contraste para foco */
+*:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* Botões com melhor acessibilidade */
+button:focus,
+.tab-button:focus,
+.quick-btn:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px var(--primary-blue);
+}
+
+/* Cards clicáveis com melhor feedback */
+.stat-card:focus,
+.tip-card:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Botões de áudio para acessibilidade */
+.tip-audio-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    min-height: 44px; /* Tamanho mínimo para toque */
+}
+
+.tip-audio-btn:hover {
+    background: var(--medical-teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tip-audio-btn:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px var(--primary-blue);
+}
+
+.tip-audio-btn:active {
+    transform: translateY(0);
+}
+
+.tip-audio-btn i {
+    font-size: 1rem;
+}
+
+/* Estados de reprodução de áudio */
+.tip-audio-btn.playing {
+    background: #f44336;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Melhor contraste para texto */
+.tip-card {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tip-card:hover,
+.tip-card:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicadores visuais para estados ARIA */
+[aria-pressed="true"] {
+    background: var(--primary-blue);
+    color: white;
+}
+
+[aria-selected="true"] {
+    background: var(--light-blue);
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+}
+
+/* Melhor feedback para elementos interativos */
+[role="button"]:hover,
+[role="button"]:focus {
+    cursor: pointer;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Indicadores de carregamento para áudio */
+.audio-loading {
+    position: relative;
+}
+
+.audio-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Melhor espaçamento para navegação por teclado */
+.tabs button {
+    margin: 2px;
+}
+
+/* Indicadores de status mais visíveis */
+.status-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--success);
+}
+
+.status-indicator.error {
+    background: var(--danger);
+}
+
+.status-indicator.warning {
+    background: #ffc107;
+}
+
+/* Melhor feedback para formulários */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+    border-color: var(--primary-blue);
+}
+
+/* Mensagens de erro mais visíveis */
+.error-message {
+    color: var(--danger);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.error-message::before {
+    content: '⚠️';
+    font-size: 1.2rem;
+}
+
+/* Melhor contraste para links */
+a {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+a:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* Indicadores de progresso acessíveis */
+.progress-bar {
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 20px;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-blue), var(--medical-teal));
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.85rem;
+}
+
+/* Melhor responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .tip-audio-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .quick-btn {
+        min-height: 60px;
+        font-size: 1rem;
+    }
+    
+    /* Maior área de toque em mobile */
+    button, 
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Controles de Acessibilidade IA */
+.accessibility-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.accessibility-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.accessibility-toggle:hover {
+    transform: scale(1.1);
+    background: var(--medical-teal);
+}
+
+.accessibility-menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.accessibility-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.accessibility-menu h3 {
+    margin: 0 0 1rem 0;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.accessibility-options {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.accessibility-options button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.accessibility-options button:hover {
+    border-color: var(--primary-blue);
+    background: var(--light-blue);
+}
+
+.accessibility-options button[aria-pressed="true"] {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+/* Assistente de Voz */
+.voice-assistant {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.voice-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.voice-toggle:hover {
+    transform: scale(1.1);
+}
+
+.voice-toggle.listening {
+    background: #27ae60;
+    animation: pulse 1.5s infinite;
+}
+
+.voice-status {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.voice-status.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estados de acessibilidade */
+body.high-contrast {
+    --primary-blue: #000080;
+    --text-dark: #000000;
+    --text-light: #333333;
+    --white: #ffffff;
+    --soft-gray: #f0f0f0;
+}
+
+body.high-contrast .tip-card,
+body.high-contrast .stat-card,
+body.high-contrast .exam-card {
+    border: 3px solid #000000;
+}
+
+body.large-text {
+    font-size: 1.2em;
+}
+
+body.large-text h1 { font-size: 2.4rem; }
+body.large-text h2 { font-size: 2rem; }
+body.large-text h3 { font-size: 1.6rem; }
+body.large-text .quick-btn { font-size: 1.1rem; }
+body.large-text .tip-audio-btn { font-size: 1.1rem; }
+
+body.motion-reduced * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+body.keyboard-nav *:focus {
+    outline: 4px solid #ff6b35 !important;
+    outline-offset: 3px !important;
+}
+
+body.colorblind-friendly {
+    filter: grayscale(0.3) contrast(1.2);
+}
+
+/* Indicadores visuais para screen reader */
+.screen-reader-active .sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.25rem 0.5rem;
+    margin: 0.25rem;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    border: 1px solid var(--primary-blue);
+    background: var(--light-blue);
+    color: var(--primary-blue);
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+/* Alto contraste para usuários com baixa visão */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-blue: #000080;
+        --text-dark: #000000;
+        --text-light: #333333;
+        --white: #ffffff;
+    }
+    
+    .tip-card,
+    .stat-card {
+        border: 2px solid #000000;
+    }
+}
+
+/* Redução de movimento para usuários sensíveis */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Modo escuro para melhor acessibilidade */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-blue: #4a90e2;
+        --medical-teal: #26a69a;
+        --text-dark: #ffffff;
+        --text-light: #cccccc;
+        --white: #1a1a1a;
+        --soft-gray: #2a2a2a;
+        --light-blue: #1e3a5f;
+    }
+    
+    body {
+        background: #121212;
+        color: #ffffff;
+    }
+}

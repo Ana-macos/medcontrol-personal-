@@ -105,6 +105,18 @@
                         <i class="fas fa-tooth"></i>
                         <span>Dentista</span>
                     </button>
+                    <button class="tab-button" onclick="showTab('saude-mental')">
+                        <i class="fas fa-brain"></i>
+                        <span>Saúde Mental</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('nutricao')">
+                        <i class="fas fa-apple-alt"></i>
+                        <span>Nutrição</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('familia')">
+                        <i class="fas fa-users"></i>
+                        <span>Saúde da Família</span>
+                    </button>
                 </nav>
             </div>
 
@@ -121,6 +133,32 @@
                     <div class="welcome-message">
                         <h3>🎉 Bem-vindo ao MedControl Personal!</h3>
                         <p>Seu sistema pessoal de gestão em saúde está funcionando perfeitamente!</p>
+                        <div class="quick-actions">
+                            <button class="quick-btn" onclick="openModal('exame-modal')">
+                                <i class="fas fa-plus"></i>
+                                <span>Adicionar<br>Exame</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('medicamento-modal')">
+                                <i class="fas fa-pills"></i>
+                                <span>Novo<br>Medicamento</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('vacina-modal')">
+                                <i class="fas fa-syringe"></i>
+                                <span>Registrar<br>Vacina</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('refeicao-modal')">
+                                <i class="fas fa-utensils"></i>
+                                <span>Registrar<br>Refeição</span>
+                            </button>
+                            <button class="quick-btn" onclick="addWater(250)">
+                                <i class="fas fa-tint"></i>
+                                <span>Beber<br>Água</span>
+                            </button>
+                            <button class="quick-btn" onclick="openModal('humor-modal')">
+                                <i class="fas fa-smile"></i>
+                                <span>Registrar<br>Humor</span>
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="stats-grid">
@@ -163,6 +201,31 @@
                                 <p>Consultas Odontológicas</p>
                             </div>
                         </div>
+                        
+                        <div class="stat-card" onclick="showTab('saude-mental')" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-humor">0</h3>
+                                <p>Registros de Humor</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('nutricao')" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-refeicoes">0</h3>
+                                <p>Refeições Registradas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activities">
+                        <h3>📅 Atividades Recentes</h3>
+                        <div id="recent-list" class="recent-items"></div>
                     </div>
                 </div>
 
@@ -419,6 +482,232 @@
                     <div id="dentista-list" class="exams-container"></div>
                 </div>
 
+                <!-- Saúde Mental -->
+                <div id="saude-mental" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Saúde Mental</h2>
+                            <p>Acompanhe seu bem-estar emocional</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('humor-modal')">
+                            <i class="fas fa-plus"></i>
+                            Registrar Humor
+                        </button>
+                    </div>
+                    
+                    <div class="mental-health-tabs">
+                        <button class="mental-tab-btn active" onclick="showMentalTab('humor')">Humor Diário</button>
+                        <button class="mental-tab-btn" onclick="showMentalTab('terapia')">Terapia</button>
+                        <button class="mental-tab-btn" onclick="showMentalTab('dicas')">Dicas de Bem-estar</button>
+                    </div>
+                    
+                    <div id="humor-diario" class="mental-content active">
+                        <div id="humor-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="terapia-sessoes" class="mental-content">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('terapia-modal')">
+                                <i class="fas fa-plus"></i>
+                                Registrar Sessão
+                            </button>
+                        </div>
+                        <div id="terapia-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="dicas-bem-estar" class="mental-content">
+                        <div class="wellness-tips">
+                            <div class="tip-card">
+                                <h3>🧘 Meditação e Mindfulness</h3>
+                                <p>Pratique 10-15 minutos diários de meditação para reduzir estresse e ansiedade.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🏃 Exercícios Regulares</h3>
+                                <p>Atividade física regular melhora o humor: caminhada, natação, yoga ou exercícios de respiração.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>📝 Registro de Emoções</h3>
+                                <p>Escreva sobre seus sentimentos para processar emoções e pensamentos.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>😴 Higiene do Sono</h3>
+                                <p>Durma 7-8 horas por noite. Mantenha ambiente escuro, temperatura adequada e evite telas antes de dormir.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🤝 Conexões Sociais</h3>
+                                <p>Mantenha contato com amigos e família. Use videochamadas, mensagens ou encontros presenciais.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🌬️ Técnicas de Respiração</h3>
+                                <p>Pratique respiração profunda: inspire por 4 segundos, segure por 4, expire por 6.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🌳 Contato com a Natureza</h3>
+                                <p>Passe tempo ao ar livre. Ouça pássaros, sinta texturas de folhas, respire ar fresco para reduzir estresse.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>⏰ Rotinas Estruturadas</h3>
+                                <p>Crie rotinas diárias previsíveis para manter consistência e redução da ansiedade.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nutrição -->
+                <div id="nutricao" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Nutrição & Alimentação Saudável</h2>
+                            <p>Acompanhe sua alimentação e hábitos nutricionais</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('refeicao-modal')">
+                            <i class="fas fa-plus"></i>
+                            Registrar Refeição
+                        </button>
+                    </div>
+                    
+                    <div class="nutrition-tabs">
+                        <button class="nutrition-tab-btn active" onclick="showNutritionTab('diario')">Diário Alimentar</button>
+                        <button class="nutrition-tab-btn" onclick="showNutritionTab('agua')">Controle de Água</button>
+                        <button class="nutrition-tab-btn" onclick="showNutritionTab('dicas')">Dicas Nutricionais</button>
+                    </div>
+                    
+                    <div id="diario-alimentar" class="nutrition-content active">
+                        <div id="refeicoes-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="controle-agua" class="nutrition-content">
+                        <div class="water-tracker">
+                            <div class="water-goal">
+                                <h3>💧 Meta Diária: 2L</h3>
+                                <div class="water-progress">
+                                    <div class="water-bar">
+                                        <div id="water-fill" class="water-fill"></div>
+                                    </div>
+                                    <span id="water-amount">0ml / 2000ml</span>
+                                </div>
+                                <div class="water-buttons">
+                                    <button class="water-btn" onclick="addWater(250)">+250ml</button>
+                                    <button class="water-btn" onclick="addWater(500)">+500ml</button>
+                                    <button class="water-btn" onclick="resetWater()">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="dicas-nutricionais" class="nutrition-content">
+                        <div class="nutrition-tips">
+                            <div class="tip-card">
+                                <h3>🍎 5 Porções de Frutas e Vegetais</h3>
+                                <p>Consuma pelo menos 5 porções coloridas por dia. Varie as cores: verde (brócolis), laranja (cenoura), roxo (berinjela) para diferentes nutrientes.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🍞 Cereais Integrais</h3>
+                                <p>Substitua refinados por integrais: arroz integral, aveia, quinoa, pão integral. Ricos em fibras, vitaminas B e mineráis.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🐟 Proteínas Magras</h3>
+                                <p>Inclua peixes (2x/semana), frango sem pele, ovos, leguminosas (feijão, lentilha), tofu e castanhas na sua dieta.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🧂 Reduza o Sódio</h3>
+                                <p>Máximo 2g/dia. Use temperos naturais: alho, cebola, ervas, limão. Evite processados e leia rótulos.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🍭 Limite Açúcar Adicionado</h3>
+                                <p>Máximo 25g/dia (6 colheres de chá). Prefira frutas frescas, evite refrigerantes e doces industrializados.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>⏰ Horários Regulares</h3>
+                                <p>Faça 5-6 refeições: café, lanche, almoço, lanche, jantar, ceia. Intervalos de 3-4 horas entre elas.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>💧 Hidratação Adequada</h3>
+                                <p>2-3 litros de água/dia. Inclua chás sem açúcar, água de coco, sucos naturais. Evite bebidas alcoólicas em excesso.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🥑 Gorduras Saudáveis</h3>
+                                <p>Prefira azeite extra virgem, abacate, castanhas, sementes, peixes gordos. Evite frituras e gorduras trans.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🥛 Cálcio e Vitamina D</h3>
+                                <p>Leite e derivados, folhas verdes escuras, sardinha, gergelim. Exponha-se ao sol 15min/dia para vitamina D.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🌶️ Antioxidantes Naturais</h3>
+                                <p>Consuma frutas vermelhas, chá verde, cacau, tomate, brócolis. Combatem radicais livres e previnem doenças.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🍽️ Mastigação Consciente</h3>
+                                <p>Mastigue devagar, saboreie os alimentos. Melhora digestão, saciedade e prazer na refeição.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🥬 Probióticos e Fibras</h3>
+                                <p>Iogurte natural, kefir, kombucha para intestino saudável. Fibras: aveia, maçã, feijão, verduras.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🍳 Preparo Saudável</h3>
+                                <p>Prefira cozido, grelhado, assado, refogado. Use pouco óleo, temperos naturais e cozinhe em casa sempre que possível.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>📊 Controle de Porções</h3>
+                                <p>Use pratos menores, sirva-se uma vez, coma devagar. Escute sinais de fome e saciedade do seu corpo.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>🍌 Lanches Inteligentes</h3>
+                                <p>Frutas, castanhas, iogurte, cenoura com homus. Evite biscoitos, salgadinhos e doces entre refeições.</p>
+                            </div>
+                            <div class="tip-card">
+                                <h3>📅 Planejamento Semanal</h3>
+                                <p>Planeje cardápio, faça lista de compras, prepare refeições antecipadamente. Economiza tempo e melhora escolhas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saúde da Família -->
+                <div id="familia" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Saúde da Família & Desenvolvimento</h2>
+                            <p>Acompanhe a saúde e desenvolvimento de toda a família</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('membro-modal')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Membro
+                        </button>
+                    </div>
+                    
+                    <div class="family-tabs">
+                        <button class="family-tab-btn active" onclick="showFamilyTab('membros')">Membros da Família</button>
+                        <button class="family-tab-btn" onclick="showFamilyTab('desenvolvimento')">Desenvolvimento Infantil</button>
+                        <button class="family-tab-btn" onclick="showFamilyTab('emergencia')">Contatos de Emergência</button>
+                    </div>
+                    
+                    <div id="membros-familia" class="family-content active">
+                        <div id="membros-list" class="family-members"></div>
+                    </div>
+                    
+                    <div id="desenvolvimento-infantil" class="family-content">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('marco-modal')">
+                                <i class="fas fa-plus"></i>
+                                Registrar Marco
+                            </button>
+                        </div>
+                        <div id="marcos-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="contatos-emergencia" class="family-content">
+                        <div class="page-header">
+                            <button class="btn-primary" onclick="openModal('contato-modal')">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Contato
+                            </button>
+                        </div>
+                        <div id="contatos-list" class="emergency-contacts"></div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -593,6 +882,278 @@
                 <div style="text-align: right; margin-top: 2rem;">
                     <button type="button" class="btn-secondary" onclick="closeModal('agendamento-modal')">Cancelar</button>
                     <button type="submit" class="btn-primary">Agendar Exame</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Humor -->
+    <div id="humor-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrar Humor</h3>
+                <button class="close" onclick="closeModal('humor-modal')">&times;</button>
+            </div>
+            <form id="humor-form">
+                <div class="form-group">
+                    <label>Como você está se sentindo?</label>
+                    <select id="humor-nivel" required>
+                        <option value="">Selecione...</option>
+                        <option value="muito-bem">😄 Muito Bem</option>
+                        <option value="bem">😊 Bem</option>
+                        <option value="neutro">😐 Neutro</option>
+                        <option value="mal">🙁 Mal</option>
+                        <option value="muito-mal">😢 Muito Mal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="humor-observacoes" rows="3" placeholder="Como foi seu dia? O que influenciou seu humor?"></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('humor-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Terapia -->
+    <div id="terapia-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrar Sessão de Terapia</h3>
+                <button class="close" onclick="closeModal('terapia-modal')">&times;</button>
+            </div>
+            <form id="terapia-form">
+                <div class="form-group">
+                    <label>Data da Sessão</label>
+                    <input type="date" id="terapia-data" required>
+                </div>
+                <div class="form-group">
+                    <label>Terapeuta</label>
+                    <input type="text" id="terapia-profissional" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Terapia</label>
+                    <select id="terapia-tipo">
+                        <option value="psicoterapia">Psicoterapia</option>
+                        <option value="cognitivo-comportamental">Cognitivo-Comportamental</option>
+                        <option value="psicanalitica">Psicanalítica</option>
+                        <option value="humanistica">Humanística</option>
+                        <option value="outra">Outra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="terapia-observacoes" rows="3" placeholder="Como foi a sessão? Principais insights..."></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('terapia-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Sessão</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Refeição -->
+    <div id="refeicao-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrar Refeição</h3>
+                <button class="close" onclick="closeModal('refeicao-modal')">&times;</button>
+            </div>
+            <form id="refeicao-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo de Refeição</label>
+                        <select id="refeicao-tipo" required>
+                            <option value="">Selecione...</option>
+                            <option value="cafe-manha">Café da Manhã</option>
+                            <option value="lanche-manha">Lanche da Manhã</option>
+                            <option value="almoco">Almoço</option>
+                            <option value="lanche-tarde">Lanche da Tarde</option>
+                            <option value="jantar">Jantar</option>
+                            <option value="ceia">Ceia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Horário</label>
+                        <input type="time" id="refeicao-horario" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alimentos Consumidos</label>
+                    <textarea id="refeicao-alimentos" rows="3" placeholder="Descreva os alimentos consumidos..." required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Calorias (estimativa)</label>
+                        <input type="number" id="refeicao-calorias" placeholder="Ex: 350">
+                    </div>
+                    <div class="form-group">
+                        <label>Sensação</label>
+                        <select id="refeicao-sensacao">
+                            <option value="satisfeito">Satisfeito</option>
+                            <option value="muito-cheio">Muito Cheio</option>
+                            <option value="ainda-com-fome">Ainda com Fome</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="refeicao-observacoes" rows="2" placeholder="Como se sentiu após a refeição?"></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('refeicao-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Membro da Família -->
+    <div id="membro-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Membro da Família</h3>
+                <button class="close" onclick="closeModal('membro-modal')">&times;</button>
+            </div>
+            <form id="membro-form">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id="membro-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Parentesco</label>
+                        <select id="membro-parentesco" required>
+                            <option value="">Selecione...</option>
+                            <option value="pai">Pai</option>
+                            <option value="mae">Mãe</option>
+                            <option value="filho">Filho(a)</option>
+                            <option value="conjuge">Cônjuge</option>
+                            <option value="irmao">Irmão(ã)</option>
+                            <option value="avo">Avô/Avó</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" id="membro-nascimento" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tipo Sanguíneo</label>
+                    <select id="membro-sangue">
+                        <option value="">Não informado</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Alergias/Condições Médicas</label>
+                    <textarea id="membro-condicoes" rows="2" placeholder="Alergias, doenças crônicas..."></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('membro-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Marco de Desenvolvimento -->
+    <div id="marco-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Registrar Marco de Desenvolvimento</h3>
+                <button class="close" onclick="closeModal('marco-modal')">&times;</button>
+            </div>
+            <form id="marco-form">
+                <div class="form-group">
+                    <label>Criança</label>
+                    <select id="marco-crianca" required>
+                        <option value="">Selecione a criança...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Idade</label>
+                        <input type="text" id="marco-idade" placeholder="Ex: 6 meses" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="marco-data" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Marco Alcançado</label>
+                    <select id="marco-tipo" required>
+                        <option value="">Selecione...</option>
+                        <option value="motor">Motor (sentar, engatinhar, andar)</option>
+                        <option value="linguagem">Linguagem (primeiras palavras, frases)</option>
+                        <option value="social">Social (sorrir, interagir)</option>
+                        <option value="cognitivo">Cognitivo (reconhecer, aprender)</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="marco-descricao" rows="3" placeholder="Descreva o marco alcançado..." required></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('marco-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Contato de Emergência -->
+    <div id="contato-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Contato de Emergência</h3>
+                <button class="close" onclick="closeModal('contato-modal')">&times;</button>
+            </div>
+            <form id="contato-form">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id="contato-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <select id="contato-tipo" required>
+                            <option value="">Selecione...</option>
+                            <option value="medico">Médico</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="farmacia">Farmácia</option>
+                            <option value="familiar">Familiar</option>
+                            <option value="bombeiros">Bombeiros</option>
+                            <option value="samu">SAMU</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="contato-telefone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Endereço/Observações</label>
+                    <textarea id="contato-endereco" rows="2" placeholder="Endereço, especialidade..."></textarea>
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('contato-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
                 </div>
             </form>
         </div>
