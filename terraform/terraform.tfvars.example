@@ -1,0 +1,24 @@
+# Configurações do MedControl Personal
+# Copie este arquivo para terraform.tfvars e ajuste os valores
+
+aws_region    = "us-east-1"
+project_name  = "medcontrol-personal"
+environment   = "prod"
+
+# Opcional: domínio personalizado
+# domain_name = "medcontrol.exemplo.com"
+
+# Configurações de performance
+lambda_memory_size      = 256
+cloudfront_price_class  = "PriceClass_100"
+enable_logging         = true
+
+# Tags personalizadas
+tags = {
+  Project     = "MedControl Personal"
+  Environment = "prod"
+  ManagedBy   = "Terraform"
+  Owner       = "Ana-macos"
+  Purpose     = "Q Developer Quest TDC 2025"
+  Repository  = "https://github.com/Ana-macos/medcontrol-personal-"
+}
