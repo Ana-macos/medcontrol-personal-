@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard - Sistema de Controle de Saúde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header-wrapper">
+            <header>
+                <div class="header-content">
+                    <div class="header-left">
+                        <div class="header-logo">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1>MedControl Personal</h1>
+                            <p>Sistema Pessoal de Gestão em Saúde</p>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="user-badge">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span id="user-name">Minha Conta</span>
+                        </div>
+                        <button class="back-to-login-btn" onclick="goToLogin()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <nav class="tabs">
+                    <div class="widget-category">
+                        <div class="category-header">
+                            <i class="fas fa-layer-group"></i>
+                            <span class="category-number">Item 1</span>
+                            <span>Módulos Principais</span>
+                        </div>
+                        <div class="category-widgets">
+                            <button class="tab-button active" onclick="showTab('dashboard')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Dashboard</div>
+                                    <div class="widget-subtitle">Visão geral</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('exames')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-file-medical-alt"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Exames</div>
+                                    <div class="widget-subtitle">Resultados</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('medicamentos')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-pills"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Medicamentos</div>
+                                    <div class="widget-subtitle">Controle</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('vacinacao')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-syringe"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Vacinação</div>
+                                    <div class="widget-subtitle">Cartão</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('dentista')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-tooth"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Odontologia</div>
+                                    <div class="widget-subtitle">Saúde bucal</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('calendario')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Agenda</div>
+                                    <div class="widget-subtitle">Consultas</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                            <button class="tab-button" onclick="showTab('relatorios')">
+                                <div class="widget-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="widget-title">Relatórios</div>
+                                    <div class="widget-subtitle">Análises</div>
+                                </div>
+                                <div class="widget-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="content-area">
+                <div class="main-content">
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-medical-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-exames">0</h3>
+                        <p>Total de Exames</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="exames-pendentes">0</h3>
+                        <p>Exames Pendentes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="exames-concluidos">0</h3>
+                        <p>Exames Concluídos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon urgent">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="exames-urgentes">0</h3>
+                        <p>Exames Urgentes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="recent-exams">
+                    <h2><i class="fas fa-history"></i> Exames Recentes</h2>
+                    <div id="recent-exams-list" class="exam-list">
+                        <!-- Exames recentes serão inseridos aqui -->
+                    </div>
+                </div>
+                
+                <div class="upcoming-exams">
+                    <h2><i class="fas fa-calendar-check"></i> Próximos Exames</h2>
+                    <div id="upcoming-exams-list" class="exam-list">
+                        <!-- Próximos exames serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exames Tab -->
+        <div id="exames" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-file-medical"></i> Gerenciar Exames</h2>
+                <button class="btn btn-primary" onclick="showAddExamModal()">
+                    <i class="fas fa-plus"></i> Adicionar Exame
+                </button>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-exams" placeholder="Buscar exames..." onkeyup="filterExams()">
+                <select id="filter-status" onchange="filterExams()">
+                    <option value="">Todos os Status</option>
+                    <option value="agendado">Agendado</option>
+                    <option value="realizado">Realizado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+                <select id="filter-type" onchange="filterExams()">
+                    <option value="">Todos os Tipos</option>
+                    <option value="sangue">Exame de Sangue</option>
+                    <option value="imagem">Exame de Imagem</option>
+                    <option value="cardiologico">Cardiológico</option>
+                    <option value="neurologico">Neurológico</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table id="exams-table">
+                    <thead>
+                        <tr>
+                            <th>Nome do Exame</th>
+                            <th>Tipo</th>
+                            <th>Data</th>
+                            <th>Médico</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="exams-tbody">
+                        <!-- Exames serão inseridos aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Medicamentos Tab -->
+        <div id="medicamentos" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-pills"></i> Controle de Medicamentos</h2>
+                <button class="btn btn-primary" onclick="showAddMedicationModal()">
+                    <i class="fas fa-plus"></i> Adicionar Medicamento
+                </button>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-medications" placeholder="Buscar medicamentos..." onkeyup="filterMedications()">
+                <select id="filter-medication-status" onchange="filterMedications()">
+                    <option value="">Todos os Status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="pausado">Pausado</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+                <select id="filter-medication-type" onchange="filterMedications()">
+                    <option value="">Todos os Tipos</option>
+                    <option value="continuo">Uso Contínuo</option>
+                    <option value="temporario">Uso Temporário</option>
+                    <option value="sos">SOS (Se Necessário)</option>
+                </select>
+            </div>
+
+            <div class="medications-grid">
+                <div id="active-medications" class="medication-section">
+                    <h3><i class="fas fa-play-circle"></i> Medicamentos Ativos</h3>
+                    <div id="active-medications-list" class="medication-cards">
+                        <!-- Medicamentos ativos serão inseridos aqui -->
+                    </div>
+                </div>
+                
+                <div id="all-medications" class="medication-section">
+                    <h3><i class="fas fa-list"></i> Todos os Medicamentos</h3>
+                    <div class="table-container">
+                        <table id="medications-table">
+                            <thead>
+                                <tr>
+                                    <th>Medicamento</th>
+                                    <th>Dosagem</th>
+                                    <th>Frequência</th>
+                                    <th>Médico</th>
+                                    <th>Status</th>
+                                    <th>Próxima Dose</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="medications-tbody">
+                                <!-- Medicamentos serão inseridos aqui -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vacinação Tab -->
+        <div id="vacinacao" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-syringe"></i> Controle de Vacinação</h2>
+                <button class="btn btn-primary" onclick="showAddVaccineModal()">
+                    <i class="fas fa-plus"></i> Adicionar Vacina
+                </button>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-vaccines" placeholder="Buscar vacinas..." onkeyup="filterVaccines()">
+                <select id="filter-vaccine-status" onchange="filterVaccines()">
+                    <option value="">Todos os Status</option>
+                    <option value="aplicada">Aplicada</option>
+                    <option value="agendada">Agendada</option>
+                    <option value="atrasada">Atrasada</option>
+                </select>
+                <select id="filter-vaccine-type" onchange="filterVaccines()">
+                    <option value="">Todos os Tipos</option>
+                    <option value="covid">COVID-19</option>
+                    <option value="gripe">Gripe</option>
+                    <option value="hepatite">Hepatite</option>
+                    <option value="tetano">Tétano</option>
+                    <option value="febre-amarela">Febre Amarela</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="vaccines-content">
+                <div class="vaccine-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="vaccines-applied">0</h3>
+                            <p>Vacinas Aplicadas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="vaccines-scheduled">0</h3>
+                            <p>Vacinas Agendadas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon urgent">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="vaccines-overdue">0</h3>
+                            <p>Vacinas Atrasadas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="vaccines-table">
+                        <thead>
+                            <tr>
+                                <th>Vacina</th>
+                                <th>Tipo</th>
+                                <th>Data Aplicação</th>
+                                <th>Próxima Dose</th>
+                                <th>Local</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vaccines-tbody">
+                            <!-- Vacinas serão inseridas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dentista Tab -->
+        <div id="dentista" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-tooth"></i> Controle Odontológico</h2>
+                <button class="btn btn-primary" onclick="showAddDentalModal()">
+                    <i class="fas fa-plus"></i> Adicionar Consulta
+                </button>
+            </div>
+
+            <div class="filters">
+                <input type="text" id="search-dental" placeholder="Buscar consultas..." onkeyup="filterDental()">
+                <select id="filter-dental-status" onchange="filterDental()">
+                    <option value="">Todos os Status</option>
+                    <option value="agendada">Agendada</option>
+                    <option value="realizada">Realizada</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+                <select id="filter-dental-type" onchange="filterDental()">
+                    <option value="">Todos os Tipos</option>
+                    <option value="limpeza">Limpeza</option>
+                    <option value="restauracao">Restauração</option>
+                    <option value="canal">Canal</option>
+                    <option value="extracao">Extração</option>
+                    <option value="ortodontia">Ortodontia</option>
+                    <option value="implante">Implante</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="dental-content">
+                <div class="dental-overview">
+                    <div class="dental-card">
+                        <div class="dental-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="dental-info">
+                            <h3>Próxima Consulta</h3>
+                            <p id="next-dental-appointment">Nenhuma agendada</p>
+                        </div>
+                    </div>
+                    <div class="dental-card">
+                        <div class="dental-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="dental-info">
+                            <h3>Última Limpeza</h3>
+                            <p id="last-cleaning">Não registrada</p>
+                        </div>
+                    </div>
+                    <div class="dental-card">
+                        <div class="dental-icon">
+                            <i class="fas fa-tooth"></i>
+                        </div>
+                        <div class="dental-info">
+                            <h3>Tratamentos Ativos</h3>
+                            <p id="active-treatments">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="dental-table">
+                        <thead>
+                            <tr>
+                                <th>Procedimento</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Dentista</th>
+                                <th>Clínica</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dental-tbody">
+                            <!-- Consultas odontológicas serão inseridas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="calendario" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar-alt"></i> Calendário de Exames</h2>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="previousMonth()">&lt;</button>
+                    <h3 id="calendar-month-year"></h3>
+                    <button onclick="nextMonth()">&gt;</button>
+                </div>
+                <div id="calendar-grid" class="calendar-grid">
+                    <!-- Calendário será gerado aqui -->
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-color exam"></div>
+                        <span>Exames</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color medication"></div>
+                        <span>Medicamentos</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color vaccine"></div>
+                        <span>Vacinas</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color dental"></div>
+                        <span>Dentista</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relatórios Tab -->
+        <div id="relatorios" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> Relatórios</h2>
+                <button class="btn btn-secondary" onclick="exportData()">
+                    <i class="fas fa-download"></i> Exportar Dados
+                </button>
+            </div>
+            
+            <div class="reports-grid">
+                <div class="report-card">
+                    <h3>Exames por Tipo</h3>
+                    <canvas id="exams-by-type-chart"></canvas>
+                </div>
+                <div class="report-card">
+                    <h3>Exames por Mês</h3>
+                    <canvas id="exams-by-month-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Exame -->
+    <div id="exam-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Adicionar Exame</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="exam-form">
+                <div class="form-group">
+                    <label for="exam-name">Nome do Exame:</label>
+                    <input type="text" id="exam-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="exam-type">Tipo:</label>
+                    <select id="exam-type" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="sangue">Exame de Sangue</option>
+                        <option value="imagem">Exame de Imagem</option>
+                        <option value="cardiologico">Cardiológico</option>
+                        <option value="neurologico">Neurológico</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exam-date">Data:</label>
+                    <input type="datetime-local" id="exam-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="exam-doctor">Médico:</label>
+                    <input type="text" id="exam-doctor" required>
+                </div>
+                <div class="form-group">
+                    <label for="exam-location">Local:</label>
+                    <input type="text" id="exam-location">
+                </div>
+                <div class="form-group">
+                    <label for="exam-status">Status:</label>
+                    <select id="exam-status" required>
+                        <option value="agendado">Agendado</option>
+                        <option value="realizado">Realizado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exam-notes">Observações:</label>
+                    <textarea id="exam-notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Medicamento -->
+    <div id="medication-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="medication-modal-title">Adicionar Medicamento</h2>
+                <span class="close" onclick="closeMedicationModal()">&times;</span>
+            </div>
+            <form id="medication-form">
+                <div class="form-group">
+                    <label for="medication-name">Nome do Medicamento:</label>
+                    <input type="text" id="medication-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="medication-dosage">Dosagem:</label>
+                    <input type="text" id="medication-dosage" placeholder="Ex: 500mg" required>
+                </div>
+                <div class="form-group">
+                    <label for="medication-frequency">Frequência:</label>
+                    <select id="medication-frequency" required>
+                        <option value="">Selecione a frequência</option>
+                        <option value="1x">1x ao dia</option>
+                        <option value="2x">2x ao dia</option>
+                        <option value="3x">3x ao dia</option>
+                        <option value="4x">4x ao dia</option>
+                        <option value="6x">6x ao dia</option>
+                        <option value="8x">8x ao dia</option>
+                        <option value="12x">12x ao dia</option>
+                        <option value="sos">SOS (Se necessário)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medication-times">Horários:</label>
+                    <input type="text" id="medication-times" placeholder="Ex: 08:00, 14:00, 20:00">
+                </div>
+                <div class="form-group">
+                    <label for="medication-type">Tipo de Uso:</label>
+                    <select id="medication-type" required>
+                        <option value="continuo">Uso Contínuo</option>
+                        <option value="temporario">Uso Temporário</option>
+                        <option value="sos">SOS (Se Necessário)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medication-start-date">Data de Início:</label>
+                    <input type="date" id="medication-start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="medication-end-date">Data de Fim (se aplicável):</label>
+                    <input type="date" id="medication-end-date">
+                </div>
+                <div class="form-group">
+                    <label for="medication-doctor">Médico Responsável:</label>
+                    <input type="text" id="medication-doctor" required>
+                </div>
+                <div class="form-group">
+                    <label for="medication-status">Status:</label>
+                    <select id="medication-status" required>
+                        <option value="ativo">Ativo</option>
+                        <option value="pausado">Pausado</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medication-notes">Observações:</label>
+                    <textarea id="medication-notes" rows="3" placeholder="Instruções especiais, efeitos colaterais, etc."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeMedicationModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Vacina -->
+    <div id="vaccine-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="vaccine-modal-title">Adicionar Vacina</h2>
+                <span class="close" onclick="closeVaccineModal()">&times;</span>
+            </div>
+            <form id="vaccine-form">
+                <div class="form-group">
+                    <label for="vaccine-name">Nome da Vacina:</label>
+                    <input type="text" id="vaccine-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-type">Tipo:</label>
+                    <select id="vaccine-type" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="covid">COVID-19</option>
+                        <option value="gripe">Gripe</option>
+                        <option value="hepatite">Hepatite</option>
+                        <option value="tetano">Tétano</option>
+                        <option value="febre-amarela">Febre Amarela</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-date">Data de Aplicação:</label>
+                    <input type="date" id="vaccine-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-next-dose">Próxima Dose (se aplicável):</label>
+                    <input type="date" id="vaccine-next-dose">
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-dose-number">Número da Dose:</label>
+                    <select id="vaccine-dose-number">
+                        <option value="1">1ª Dose</option>
+                        <option value="2">2ª Dose</option>
+                        <option value="3">3ª Dose</option>
+                        <option value="4">4ª Dose</option>
+                        <option value="reforco">Dose de Reforço</option>
+                        <option value="anual">Dose Anual</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-location">Local de Aplicação:</label>
+                    <input type="text" id="vaccine-location" placeholder="Ex: UBS, Hospital, Clínica">
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-batch">Lote da Vacina:</label>
+                    <input type="text" id="vaccine-batch">
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-professional">Profissional Responsável:</label>
+                    <input type="text" id="vaccine-professional">
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-status">Status:</label>
+                    <select id="vaccine-status" required>
+                        <option value="aplicada">Aplicada</option>
+                        <option value="agendada">Agendada</option>
+                        <option value="atrasada">Atrasada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="vaccine-notes">Observações:</label>
+                    <textarea id="vaccine-notes" rows="3" placeholder="Reações, observações especiais, etc."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeVaccineModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Consulta Odontológica -->
+    <div id="dental-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="dental-modal-title">Adicionar Consulta Odontológica</h2>
+                <span class="close" onclick="closeDentalModal()">&times;</span>
+            </div>
+            <form id="dental-form">
+                <div class="form-group">
+                    <label for="dental-procedure">Procedimento:</label>
+                    <input type="text" id="dental-procedure" required>
+                </div>
+                <div class="form-group">
+                    <label for="dental-type">Tipo:</label>
+                    <select id="dental-type" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="limpeza">Limpeza</option>
+                        <option value="restauracao">Restauração</option>
+                        <option value="canal">Canal</option>
+                        <option value="extracao">Extração</option>
+                        <option value="ortodontia">Ortodontia</option>
+                        <option value="implante">Implante</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dental-date">Data:</label>
+                    <input type="datetime-local" id="dental-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="dental-dentist">Dentista:</label>
+                    <input type="text" id="dental-dentist" required>
+                </div>
+                <div class="form-group">
+                    <label for="dental-clinic">Clínica:</label>
+                    <input type="text" id="dental-clinic">
+                </div>
+                <div class="form-group">
+                    <label for="dental-tooth">Dente(s) Tratado(s):</label>
+                    <input type="text" id="dental-tooth" placeholder="Ex: 16, 17, 18">
+                </div>
+                <div class="form-group">
+                    <label for="dental-value">Valor:</label>
+                    <input type="number" id="dental-value" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="dental-status">Status:</label>
+                    <select id="dental-status" required>
+                        <option value="agendada">Agendada</option>
+                        <option value="realizada">Realizada</option>
+                        <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dental-next-appointment">Próximo Retorno:</label>
+                    <input type="date" id="dental-next-appointment">
+                </div>
+                <div class="form-group">
+                    <label for="dental-notes">Observações:</label>
+                    <textarea id="dental-notes" rows="3" placeholder="Detalhes do procedimento, recomendações, etc."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeDentalModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Função direta no HTML para garantir que funcione
+        function goToLogin() {
+            // Apenas remover dados de sessão atual, manter dados de login salvos
+            sessionStorage.removeItem('currentHealthUser');
+            localStorage.removeItem('currentHealthUser');
+            
+            // Redirecionar para login
+            window.location.href = 'index.html';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

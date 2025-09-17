@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedControl Personal - Sistema Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --medical-teal: #00a8a8;
+            --health-green: #28a745;
+            --medical-navy: #1e3a5f;
+            --soft-gray: #f8f9fa;
+            --light-blue: #e3f2fd;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Tela de Login */
+        .login-screen {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--soft-gray) 0%, var(--white) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-header .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .login-header .logo i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .login-header h1 {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-light);
+            z-index: 2;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .login-btn, .demo-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+            color: var(--white);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        .demo-btn {
+            background: var(--soft-gray);
+            color: var(--text-dark);
+            border: 2px solid #e1e5e9;
+        }
+
+        .demo-btn:hover {
+            background: var(--light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--soft-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Sistema Principal */
+        .main-system {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .main-system.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+            color: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .header-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-layout {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--white);
+            border-right: 1px solid #dee2e6;
+            padding: 2rem 0;
+        }
+
+        .tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .tab-button {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .tab-button:hover {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+            color: var(--white);
+        }
+
+        .tab-button i {
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-blue), var(--medical-teal));
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .welcome-message {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        .close {
+            color: var(--text-light);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close:hover {
+            color: var(--text-dark);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .btn-secondary {
+            background: var(--soft-gray);
+            color: var(--text-dark);
+            border: 2px solid #e1e5e9;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        /* Lista de Exames */
+        .exams-container {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .exam-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .exam-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .exam-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .exam-info span {
+            color: var(--text-light);
+        }
+
+        .exam-info strong {
+            color: var(--text-dark);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-agendado {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-realizado {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelado {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem 0;
+            }
+            
+            .tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .tab-button {
+                min-width: 120px;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1>MedControl Personal</h1>
+                <p>Sistema Pessoal de Gestão em Saúde</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" placeholder="Nome de usuário" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" placeholder="Senha" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">Entrar</span>
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </button>
+                
+                <button type="button" class="demo-btn" onclick="loginAsDemo()">
+                    <i class="fas fa-play"></i>
+                    Acessar Demonstração
+                </button>
+            </form>
+            
+            <div class="info">
+                <strong>Dados para teste:</strong><br>
+                Usuário: admin | Senha: admin123<br>
+                Usuário: demo | Senha: demo123
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Principal -->
+    <div id="main-system" class="main-system">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-logo">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>MedControl Personal</h1>
+                        <p>Sistema Pessoal de Gestão em Saúde</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-badge">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span id="user-name">Usuário</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <nav class="tabs">
+                    <button class="tab-button active" onclick="showTab('dashboard')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('exames')">
+                        <i class="fas fa-file-medical-alt"></i>
+                        <span>Exames</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('medicamentos')">
+                        <i class="fas fa-pills"></i>
+                        <span>Medicamentos</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('vacinas')">
+                        <i class="fas fa-syringe"></i>
+                        <span>Vacinas</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('dentista')">
+                        <i class="fas fa-tooth"></i>
+                        <span>Dentista</span>
+                    </button>
+                </nav>
+            </div>
+
+            <div class="content">
+                <!-- Dashboard -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="page-header">
+                        <div>
+                            <h2>Dashboard</h2>
+                            <p>Visão geral da sua saúde</p>
+                        </div>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>🎉 Bem-vindo ao MedControl Personal!</h3>
+                        <p>Seu sistema pessoal de gestão em saúde está funcionando perfeitamente!</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-medical-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>5</h3>
+                                <p>Exames Realizados</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>3</h3>
+                                <p>Medicamentos Ativos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>12</h3>
+                                <p>Vacinas Aplicadas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-tooth"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>8</h3>
+                                <p>Consultas Odontológicas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <h4>Relatórios Avançados</h4>
+                            <p>Visualize gráficos e estatísticas da sua saúde</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-bell"></i>
+                            <h4>Lembretes Inteligentes</h4>
+                            <p>Nunca mais esqueça de tomar medicamentos</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Dados Seguros</h4>
+                            <p>Suas informações ficam apenas no seu dispositivo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exames -->
+                <div id="exames" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Exames</h2>
+                            <p>Gerencie seus exames médicos</p>
+                        </div>
+                        <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento!')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Exame
+                        </button>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>📋 Módulo de Exames</h3>
+                        <p>Aqui você pode gerenciar todos os seus exames médicos, resultados e acompanhar o histórico completo.</p>
+                    </div>
+                </div>
+
+                <!-- Medicamentos -->
+                <div id="medicamentos" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Medicamentos</h2>
+                            <p>Gerencie seus medicamentos e horários</p>
+                        </div>
+                        <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento!')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Medicamento
+                        </button>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>💊 Módulo de Medicamentos</h3>
+                        <p>Controle seus medicamentos, horários, dosagens e nunca mais esqueça de tomar suas medicações.</p>
+                    </div>
+                </div>
+
+                <!-- Vacinas -->
+                <div id="vacinas" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Vacinação</h2>
+                            <p>Acompanhe seu histórico de vacinas</p>
+                        </div>
+                        <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento!')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Vacina
+                        </button>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>💉 Módulo de Vacinação</h3>
+                        <p>Mantenha seu cartão de vacinação sempre atualizado e receba lembretes de reforços.</p>
+                    </div>
+                </div>
+
+                <!-- Dentista -->
+                <div id="dentista" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle Odontológico</h2>
+                            <p>Gerencie suas consultas dentárias</p>
+                        </div>
+                        <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento!')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Consulta
+                        </button>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>🦷 Módulo Odontológico</h3>
+                        <p>Controle suas consultas, tratamentos e custos odontológicos de forma organizada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Adicionar Exame -->
+    <div id="addExamModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Exame</h3>
+                <button class="close" onclick="closeAddExamModal()">&times;</button>
+            </div>
+            <form id="examForm">
+                <div class="form-group">
+                    <label for="examName">Nome do Exame</label>
+                    <input type="text" id="examName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="examType">Tipo</label>
+                        <select id="examType" required>
+                            <option value="">Selecione</option>
+                            <option value="sangue">Sangue</option>
+                            <option value="imagem">Imagem</option>
+                            <option value="cardiologico">Cardiológico</option>
+                            <option value="neurologico">Neurológico</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="examStatus">Status</label>
+                        <select id="examStatus" required>
+                            <option value="agendado">Agendado</option>
+                            <option value="realizado">Realizado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="examDate">Data</label>
+                        <input type="date" id="examDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="examTime">Horário</label>
+                        <input type="time" id="examTime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="examDoctor">Médico</label>
+                    <input type="text" id="examDoctor">
+                </div>
+                <div class="form-group">
+                    <label for="examLocal">Local</label>
+                    <input type="text" id="examLocal">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeAddExamModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Exame</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Dados de usuários
+        const users = [
+            { username: 'admin', password: 'admin123', fullName: 'Administrador' },
+            { username: 'demo', password: 'demo123', fullName: 'Usuário Demonstração' }
+        ];
+
+        let currentUser = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+        });
+
+        // Processar login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showAlert('Por favor, preencha todos os campos.', 'error');
+                return;
+            }
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                showAlert('Login realizado com sucesso!', 'success');
+                setTimeout(() => {
+                    showMainSystem();
+                }, 1000);
+            } else {
+                showAlert('Usuário ou senha incorretos.', 'error');
+            }
+        }
+
+        // Login como demonstração
+        function loginAsDemo() {
+            const demoUser = users.find(u => u.username === 'demo');
+            if (demoUser) {
+                currentUser = demoUser;
+                showAlert('Entrando na demonstração...', 'success');
+                setTimeout(() => {
+                    showMainSystem();
+                }, 1000);
+            }
+        }
+
+        // Mostrar sistema principal
+        function showMainSystem() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-system').classList.add('active');
+            document.getElementById('user-name').textContent = currentUser.fullName;
+        }
+
+        // Navegação entre abas
+        function showTab(tabName) {
+            // Remover classe active de todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Ativar aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Carregar dados específicos da aba
+            if (tabName === 'exames') {
+                loadExams();
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                currentUser = null;
+                document.getElementById('main-system').classList.remove('active');
+                document.getElementById('login-screen').style.display = 'flex';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+        }
+
+        // Mostrar alertas
+        function showAlert(message, type = 'info') {
+            const existingAlert = document.querySelector('.alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#007bff'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-weight: 500;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.remove();
+                }
+            }, 3000);
+        }
+
+        // Adicionar animação CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Dados dos exames
+        let exams = JSON.parse(localStorage.getItem('medcontrol_exams')) || [];
+
+        // Mostrar modal de adicionar exame
+        function showAddExamModal() {
+            document.getElementById('addExamModal').style.display = 'block';
+        }
+
+        // Fechar modal
+        function closeAddExamModal() {
+            document.getElementById('addExamModal').style.display = 'none';
+            document.getElementById('examForm').reset();
+        }
+
+        // Adicionar exame
+        document.getElementById('examForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const exam = {
+                id: Date.now(),
+                name: document.getElementById('examName').value,
+                type: document.getElementById('examType').value,
+                status: document.getElementById('examStatus').value,
+                date: document.getElementById('examDate').value,
+                time: document.getElementById('examTime').value,
+                doctor: document.getElementById('examDoctor').value,
+                local: document.getElementById('examLocal').value
+            };
+            
+            exams.push(exam);
+            localStorage.setItem('medcontrol_exams', JSON.stringify(exams));
+            
+            showAlert('Exame adicionado com sucesso!', 'success');
+            closeAddExamModal();
+            loadExams();
+        });
+
+        // Carregar exames
+        function loadExams() {
+            const container = document.getElementById('exams-list');
+            
+            if (exams.length === 0) {
+                container.innerHTML = `
+                    <div class="welcome-message">
+                        <h3>📋 Nenhum exame cadastrado</h3>
+                        <p>Clique em "Adicionar Exame" para começar a gerenciar seus exames médicos.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = exams.map(exam => `
+                <div class="exam-card">
+                    <div class="exam-header">
+                        <div>
+                            <div class="exam-title">${exam.name}</div>
+                            <span class="status-badge status-${exam.status}">${exam.status.charAt(0).toUpperCase() + exam.status.slice(1)}</span>
+                        </div>
+                    </div>
+                    <div class="exam-info">
+                        <div><span>Tipo:</span> <strong>${exam.type.charAt(0).toUpperCase() + exam.type.slice(1)}</strong></div>
+                        <div><span>Data:</span> <strong>${new Date(exam.date).toLocaleDateString('pt-BR')}</strong></div>
+                        ${exam.time ? `<div><span>Horário:</span> <strong>${exam.time}</strong></div>` : ''}
+                        ${exam.doctor ? `<div><span>Médico:</span> <strong>${exam.doctor}</strong></div>` : ''}
+                        ${exam.local ? `<div><span>Local:</span> <strong>${exam.local}</strong></div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Carregar exames quando a aba for ativada
+        const originalShowTab = showTab;
+        showTab = function(tabName) {
+            originalShowTab.call(this, tabName);
+            if (tabName === 'exames') {
+                loadExams();
+            }
+        };
+
+        console.log('MedControl Personal carregado com sucesso!');
+        console.log('Usuários disponíveis: admin/admin123 ou demo/demo123');
+    </script>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedControl Personal - Sistema Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1>MedControl Personal</h1>
+                <p>Sistema Pessoal de Gestão em Saúde</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" placeholder="Nome de usuário" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" placeholder="Senha" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">Entrar</span>
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </button>
+                
+                <button type="button" class="demo-btn" onclick="loginAsDemo()">
+                    <i class="fas fa-play"></i>
+                    Acessar Demonstração
+                </button>
+            </form>
+            
+            <div class="info">
+                <strong>Dados para teste:</strong><br>
+                Usuário: admin | Senha: admin123<br>
+                Usuário: demo | Senha: demo123
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Principal -->
+    <div id="main-system" class="main-system">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-logo">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>MedControl Personal</h1>
+                        <p>Sistema Pessoal de Gestão em Saúde</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-badge">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span id="user-name">Usuário</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <div class="sidebar">
+                <nav class="tabs">
+                    <button class="tab-button active" onclick="showTab('dashboard')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('exames')">
+                        <i class="fas fa-file-medical-alt"></i>
+                        <span>Exames</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('medicamentos')">
+                        <i class="fas fa-pills"></i>
+                        <span>Medicamentos</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('vacinas')">
+                        <i class="fas fa-syringe"></i>
+                        <span>Vacinas</span>
+                    </button>
+                    <button class="tab-button" onclick="showTab('dentista')">
+                        <i class="fas fa-tooth"></i>
+                        <span>Dentista</span>
+                    </button>
+                </nav>
+            </div>
+
+            <div class="content">
+                <!-- Dashboard -->
+                <div id="dashboard" class="tab-content active">
+                    <div class="page-header">
+                        <div>
+                            <h2>Dashboard</h2>
+                            <p>Visão geral da sua saúde</p>
+                        </div>
+                    </div>
+                    
+                    <div class="welcome-message">
+                        <h3>🎉 Bem-vindo ao MedControl Personal!</h3>
+                        <p>Seu sistema pessoal de gestão em saúde está funcionando perfeitamente!</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card" onclick="showTab('exames')" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-medical-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-exames">0</h3>
+                                <p>Exames Cadastrados</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('medicamentos')" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-medicamentos">0</h3>
+                                <p>Medicamentos Ativos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="goToVacinas()" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-syringe"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-vacinas">0</h3>
+                                <p>Vacinas Aplicadas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card" onclick="showTab('dentista')" style="cursor: pointer;">
+                            <div class="stat-icon">
+                                <i class="fas fa-tooth"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-dentista">0</h3>
+                                <p>Consultas Odontológicas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exames -->
+                <div id="exames" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Exames</h2>
+                            <p>Gerencie seus exames médicos</p>
+                        </div>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn-primary" onclick="openModal('exame-modal')">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Exame
+                            </button>
+                            <button class="btn-primary" onclick="openModal('agendamento-modal')">
+                                <i class="fas fa-calendar-plus"></i>
+                                Agendar Exame
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exam-tabs">
+                        <button class="exam-tab-btn active" onclick="showExamTab('realizados')">Exames Realizados</button>
+                        <button class="exam-tab-btn" onclick="showExamTab('agendados')">Exames Agendados</button>
+                    </div>
+                    
+                    <div id="exames-realizados" class="exam-content active">
+                        <div id="exames-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="exames-agendados" class="exam-content">
+                        <div id="agendamentos-list" class="exams-container"></div>
+                    </div>
+                </div>
+
+                <!-- Medicamentos -->
+                <div id="medicamentos" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Medicamentos</h2>
+                            <p>Gerencie seus medicamentos e horários</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('medicamento-modal')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Medicamento
+                        </button>
+                    </div>
+                    
+                    <div id="medicamentos-list" class="exams-container"></div>
+                </div>
+
+                <!-- Vacinas -->
+                <div id="vacinas" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle de Vacinação</h2>
+                            <p>Acompanhe seu histórico de vacinas</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('vacina-modal')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Vacina
+                        </button>
+                    </div>
+                    
+                    <div class="vaccine-tabs">
+                        <button class="vaccine-tab-btn active" onclick="showVaccineTab('minhas')">Minhas Vacinas</button>
+                        <button class="vaccine-tab-btn" onclick="showVaccineTab('calendario')">Calendário Vacinal</button>
+                        <button class="vaccine-tab-btn" onclick="showVaccineTab('internacionais')">Vacinas Internacionais</button>
+                    </div>
+                    
+                    <div id="minhas-vacinas" class="vaccine-content active">
+                        <div id="vacinas-list" class="exams-container"></div>
+                    </div>
+                    
+                    <div id="calendario-vacinal" class="vaccine-content">
+                        <div class="age-groups">
+                            <div class="age-group">
+                                <h3>👶 Recém-nascidos (0-2 meses)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">BCG - Tuberculose</div>
+                                    <div class="vaccine-item">Hepatite B (1ª dose)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>👶 Bebês (2-6 meses)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">Pentavalente (DTP+Hib+HepB) - 1ª, 2ª e 3ª doses</div>
+                                    <div class="vaccine-item">VIP (Poliomielite inativada) - 1ª, 2ª e 3ª doses</div>
+                                    <div class="vaccine-item">Pneumocócica 10V - 1ª e 2ª doses</div>
+                                    <div class="vaccine-item">Rotavírus - 1ª e 2ª doses</div>
+                                    <div class="vaccine-item">Meningocócica C - 1ª e 2ª doses</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>👶 Bebês (9-15 meses)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">Febre Amarela (1ª dose)</div>
+                                    <div class="vaccine-item">Tríplice Viral (SCR) - Sarampo, Caxumba, Rubéola</div>
+                                    <div class="vaccine-item">Pneumocócica 10V (reforço)</div>
+                                    <div class="vaccine-item">Meningocócica C (reforço)</div>
+                                    <div class="vaccine-item">DTP (reforço)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>🧒 Crianças (4-6 anos)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">DTP (2º reforço)</div>
+                                    <div class="vaccine-item">VOP (Poliomielite oral)</div>
+                                    <div class="vaccine-item">Tríplice Viral (2ª dose)</div>
+                                    <div class="vaccine-item">Varicela (Catapora)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>🧒 Pré-adolescentes (9-14 anos)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">HPV (Papilomavírus Humano) - 2 doses</div>
+                                    <div class="vaccine-item">Meningocócica ACWY</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>👨‍🦱 Adolescentes/Adultos (15+ anos)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">dT (Dupla adulto) - a cada 10 anos</div>
+                                    <div class="vaccine-item">Febre Amarela (reforço a cada 10 anos)</div>
+                                    <div class="vaccine-item">Tríplice Viral (se não vacinado)</div>
+                                    <div class="vaccine-item">Hepatite B (3 doses se não vacinado)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>🤰 Gestantes</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">dTpa (Tríplice bacteriana acelular)</div>
+                                    <div class="vaccine-item">Influenza (Gripe)</div>
+                                    <div class="vaccine-item">COVID-19</div>
+                                </div>
+                            </div>
+                            
+                            <div class="age-group">
+                                <h3>👴 Idosos (60+ anos)</h3>
+                                <div class="vaccine-list">
+                                    <div class="vaccine-item">Influenza (anual)</div>
+                                    <div class="vaccine-item">Pneumocócica 23V</div>
+                                    <div class="vaccine-item">Herpes Zóster</div>
+                                    <div class="vaccine-item">COVID-19 (reforços)</div>
+                                    <div class="vaccine-item">dT (a cada 10 anos)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="vacinas-internacionais" class="vaccine-content">
+                        <div class="country-search">
+                            <h3>🔍 Consultar Vacinas por País</h3>
+                            <div class="search-container">
+                                <input type="text" id="country-search" placeholder="Digite o nome do país..." oninput="searchCountryVaccines()">
+                                <div id="vaccine-results" class="vaccine-results"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="international-vaccines">
+                            
+                            <div class="vaccine-category">
+                                <h3>📋 Certificados Internacionais</h3>
+                                
+                                <h4>CIVP - Certificado Internacional de Vacinação ou Profilaxia</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Febre Amarela:</strong> Obrigatório para África e América do Sul</p>
+                                    <p>Válido por 10 anos a partir de 10 dias após a vacinação</p>
+                                    <p>Emitido pela ANVISA nos aeroportos e postos de saúde credenciados</p>
+                                </div>
+                                
+                                <h4>Certificado de Vacinação Meningocócica</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Arábia Saudita:</strong> Obrigatório para Hajj e Umrah</p>
+                                    <p>Válido por 3 anos</p>
+                                </div>
+                                
+                                <h4>Certificado de Vacinação contra Poliomielite</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Paquistão, Afeganistão:</strong> Obrigatório para saída</p>
+                                    <p>Entre 4 semanas a 12 meses antes da viagem</p>
+                                </div>
+                                
+                                <h4>Certificado COVID-19</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Vários países:</strong> Comprovante de vacinação</p>
+                                    <p>ConecteSUS ou tradução juramentada</p>
+                                </div>
+                                
+                                <h4>Certificado de Vacinação Meningocócica</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Arábia Saudita:</strong> Obrigatório para Hajj e Umrah</p>
+                                    <p>Válido por 3 anos, deve ser aplicada pelo menos 10 dias antes da viagem</p>
+                                    <p>Certificado em inglês ou árabe</p>
+                                </div>
+                                
+                                <h4>Certificado de Vacinação contra Poliomielite</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Paquistão, Afeganistão:</strong> Obrigatório para saída do país</p>
+                                    <p>Deve ser aplicada entre 4 semanas a 12 meses antes da viagem</p>
+                                    <p>Certificado internacional em inglês</p>
+                                </div>
+                                
+                                <h4>Certificado COVID-19</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Vários países:</strong> Comprovante de vacinação ou teste negativo</p>
+                                    <p>Certificado Nacional de Vacinação COVID-19 (ConecteSUS)</p>
+                                    <p>Alguns países exigem tradução juramentada</p>
+                                </div>
+                                
+                                <h4>Certificado de Profilaxia da Malária</h4>
+                                <div class="certificate-info">
+                                    <p><strong>África e Ásia:</strong> Comprovante de profilaxia em áreas endêmicas</p>
+                                    <p>Prescrição médica com medicamentos antimaláricos</p>
+                                    <p>Documento em inglês ou idioma local</p>
+                                </div>
+                                
+                                <h4>Certificado de Vacinação contra Cólera</h4>
+                                <div class="certificate-info">
+                                    <p><strong>Alguns países africanos:</strong> Exigido em situações de surto</p>
+                                    <p>Válido por 6 meses após a vacinação</p>
+                                    <p>Raramente exigido, consultar situação atual</p>
+                                </div>
+                                
+                                <div class="certificate-info" style="margin-top: 1rem; background: #fff3cd; border-left-color: #ffc107;">
+                                    <p><strong>⚠️ Importante:</strong> Sempre consulte o consulado ou embaixada do país de destino antes de viajar, pois as exigências podem mudar.</p>
+                                    <p><strong>📍 Onde obter:</strong> ANVISA, Postos de Saúde Internacionais, Clínicas de Medicina do Viajante</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dentista -->
+                <div id="dentista" class="tab-content">
+                    <div class="page-header">
+                        <div>
+                            <h2>Controle Odontológico</h2>
+                            <p>Gerencie suas consultas dentárias</p>
+                        </div>
+                        <button class="btn-primary" onclick="openModal('dentista-modal')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Consulta
+                        </button>
+                    </div>
+                    
+                    <div id="dentista-list" class="exams-container"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="exame-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Exame</h3>
+                <button class="close" onclick="closeModal('exame-modal')">&times;</button>
+            </div>
+            <form id="exame-form">
+                <div class="form-group">
+                    <label>Nome do Exame</label>
+                    <input type="text" id="exame-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="exame-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="exame-status">
+                            <option value="agendado">Agendado</option>
+                            <option value="realizado">Realizado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Médico</label>
+                    <input type="text" id="exame-medico">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('exame-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Exame</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="medicamento-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Medicamento</h3>
+                <button class="close" onclick="closeModal('medicamento-modal')">&times;</button>
+            </div>
+            <form id="medicamento-form">
+                <div class="form-group">
+                    <label>Nome do Medicamento</label>
+                    <input type="text" id="med-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Dosagem</label>
+                        <input type="text" id="med-dosagem" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Frequência</label>
+                        <input type="text" id="med-frequencia" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Médico</label>
+                    <input type="text" id="med-medico">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('medicamento-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Medicamento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="vacina-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Vacina</h3>
+                <button class="close" onclick="closeModal('vacina-modal')">&times;</button>
+            </div>
+            <form id="vacina-form">
+                <div class="form-group">
+                    <label>Nome da Vacina</label>
+                    <input type="text" id="vacina-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="vacina-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Local</label>
+                        <input type="text" id="vacina-local" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Próxima Dose</label>
+                    <input type="date" id="vacina-proxima">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('vacina-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Vacina</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dentista-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Adicionar Consulta Odontológica</h3>
+                <button class="close" onclick="closeModal('dentista-modal')">&times;</button>
+            </div>
+            <form id="dentista-form">
+                <div class="form-group">
+                    <label>Procedimento</label>
+                    <input type="text" id="dentista-procedimento" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="dentista-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Custo</label>
+                        <input type="number" id="dentista-custo" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Dentista</label>
+                    <input type="text" id="dentista-nome">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('dentista-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Consulta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="agendamento-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agendar Exame</h3>
+                <button class="close" onclick="closeModal('agendamento-modal')">&times;</button>
+            </div>
+            <form id="agendamento-form">
+                <div class="form-group">
+                    <label>Nome do Exame</label>
+                    <input type="text" id="agend-nome" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date" id="agend-data" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Horário</label>
+                        <input type="time" id="agend-horario" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Médico</label>
+                    <input type="text" id="agend-medico">
+                </div>
+                <div class="form-group">
+                    <label>Local</label>
+                    <input type="text" id="agend-local">
+                </div>
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button type="button" class="btn-secondary" onclick="closeModal('agendamento-modal')">Cancelar</button>
+                    <button type="submit" class="btn-primary">Agendar Exame</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
