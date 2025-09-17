@@ -3,9 +3,13 @@
     "medcontrol": {
       "command": "node",
       "args": ["mcp-server/index.js"],
+      "cwd": "/Users/anaflavia/controle-exames-medicos",
       "env": {
         "NODE_ENV": "development"
       }
     }
+  },
+  "amazonQ.mcpConfig": {
+    "configFile": "mcp-config.json"
   }
 }

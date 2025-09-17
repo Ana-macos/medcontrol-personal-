@@ -1,9 +1,12 @@
 {
   "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["@modelcontextprotocol/server-filesystem", "/Users/anaflavia/controle-exames-medicos"],
-      "env": {}
+    "medcontrol": {
+      "command": "node",
+      "args": ["mcp-server/index.js"],
+      "cwd": "/Users/anaflavia/controle-exames-medicos",
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   }
 }

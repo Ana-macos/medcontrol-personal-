@@ -1,0 +1,128 @@
+{
+  "server": {
+    "name": "medcontrol-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP Server para MedControl Personal - Sistema de Gestão em Saúde"
+  },
+  "tools": {
+    "get_health_stats": {
+      "description": "Obtém estatísticas completas de saúde do usuário",
+      "parameters": {
+        "userId": {
+          "type": "string",
+          "required": true,
+          "description": "ID do usuário (admin, demo, etc.)"
+        }
+      }
+    },
+    "add_exam": {
+      "description": "Adiciona um novo exame médico ao sistema",
+      "parameters": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Nome completo do exame médico"
+        },
+        "date": {
+          "type": "string",
+          "required": true,
+          "format": "date",
+          "description": "Data do exame no formato YYYY-MM-DD"
+        },
+        "doctor": {
+          "type": "string",
+          "required": false,
+          "description": "Nome do médico responsável"
+        },
+        "status": {
+          "type": "string",
+          "required": true,
+          "enum": ["agendado", "realizado", "cancelado"],
+          "description": "Status atual do exame"
+        }
+      }
+    },
+    "add_medication": {
+      "description": "Adiciona um novo medicamento ao controle",
+      "parameters": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Nome do medicamento"
+        },
+        "dosage": {
+          "type": "string",
+          "required": true,
+          "description": "Dosagem do medicamento (ex: 500mg, 10ml)"
+        },
+        "frequency": {
+          "type": "string",
+          "required": true,
+          "description": "Frequência de uso (ex: 8/8h, 2x ao dia)"
+        },
+        "doctor": {
+          "type": "string",
+          "required": false,
+          "description": "Médico que prescreveu"
+        }
+      }
+    },
+    "get_accessibility_status": {
+      "description": "Verifica o status dos recursos de acessibilidade",
+      "parameters": {
+        "feature": {
+          "type": "string",
+          "required": false,
+          "enum": ["high_contrast", "large_text", "screen_reader", "voice_commands", "all"],
+          "description": "Recurso específico a verificar ou 'all' para todos"
+        }
+      }
+    },
+    "generate_health_report": {
+      "description": "Gera relatório personalizado de saúde",
+      "parameters": {
+        "period": {
+          "type": "string",
+          "required": true,
+          "enum": ["week", "month", "year"],
+          "description": "Período do relatório"
+        },
+        "includeModules": {
+          "type": "array",
+          "required": false,
+          "items": {
+            "type": "string",
+            "enum": ["exams", "medications", "vaccines", "mental_health", "nutrition", "family"]
+          },
+          "description": "Módulos a incluir no relatório"
+        }
+      }
+    }
+  },
+  "examples": {
+    "get_health_stats": {
+      "input": {
+        "userId": "admin"
+      },
+      "description": "Obter estatísticas do usuário admin"
+    },
+    "add_exam": {
+      "input": {
+        "name": "Hemograma Completo",
+        "date": "2025-01-20",
+        "doctor": "Dr. Silva",
+        "status": "agendado"
+      },
+      "description": "Adicionar exame de sangue"
+    },
+    "add_medication": {
+      "input": {
+        "name": "Paracetamol",
+        "dosage": "500mg",
+        "frequency": "8/8h",
+        "doctor": "Dr. Santos"
+      },
+      "description": "Adicionar medicamento para dor"
+    }
+  }
+}
