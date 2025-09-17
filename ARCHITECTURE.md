@@ -1,128 +1,262 @@
 # 🏗️ Arquitetura do MedControl Personal
 
-## 📊 Diagrama de Arquitetura
+## 📊 Visão Geral da Arquitetura
 
 ```mermaid
 graph TB
-    subgraph "Frontend - Interface do Usuário"
-        A[index.html - Sistema Principal]
-        B[index-acessivel.html - Versão Acessível]
-        C[styles.css - Estilos Padrão]
-        D[styles-acessivel.css - Estilos Acessíveis]
-        E[script.js - Lógica Principal]
-        F[script-acessivel.js - IA de Acessibilidade]
+    subgraph "🌐 CAMADA DE APRESENTAÇÃO"
+        direction TB
+        UI["🖥️ Interface do Usuário"]
+        MAIN["📄 Sistema Principal<br/>index.html"]
+        ACCESS["♿ Versão Acessível<br/>index-acessivel.html"]
+        
+        UI --> MAIN
+        UI --> ACCESS
     end
 
-    subgraph "Camada de Apresentação"
-        G[Dashboard]
-        H[Controle de Exames]
-        I[Medicamentos]
-        J[Vacinas]
-        K[Dentista]
-        L[Saúde Mental]
-        M[Nutrição]
-        N[Saúde da Família]
+    subgraph "🧠 CAMADA DE LÓGICA"
+        direction TB
+        LOGIC["⚙️ JavaScript Engine"]
+        STANDARD["📜 Script Principal<br/>script.js"]
+        AI["🤖 IA Acessibilidade<br/>script-acessivel.js"]
+        
+        LOGIC --> STANDARD
+        LOGIC --> AI
     end
 
-    subgraph "Recursos de Acessibilidade"
-        O[Web Speech API]
-        P[Reconhecimento de Voz]
-        Q[Síntese de Voz]
-        R[ARIA Labels]
-        S[Navegação por Teclado]
-        T[Alto Contraste]
+    subgraph "🎨 CAMADA DE ESTILO"
+        direction TB
+        STYLES["🎨 CSS Engine"]
+        CSS1["🎯 Estilos Padrão<br/>styles.css"]
+        CSS2["♿ Estilos Acessíveis<br/>styles-acessivel.css"]
+        
+        STYLES --> CSS1
+        STYLES --> CSS2
     end
 
-    subgraph "Armazenamento Local"
-        U[(LocalStorage)]
-        V[Exames]
-        W[Medicamentos]
-        X[Vacinas]
-        Y[Humor]
-        Z[Refeições]
-        AA[Família]
-        BB[Preferências]
+    subgraph "💾 CAMADA DE DADOS"
+        direction TB
+        STORAGE["💾 Armazenamento Local"]
+        LS[("🗄️ LocalStorage<br/>Banco de Dados")]
+        
+        STORAGE --> LS
     end
 
-    subgraph "APIs Nativas do Browser"
-        CC[Web Storage API]
-        DD[Web Speech API]
-        EE[Geolocation API]
-        FF[Notification API]
+    subgraph "🔌 CAMADA DE INTEGRAÇÃO"
+        direction TB
+        APIS["🔌 Web APIs"]
+        SPEECH["🎤 Speech API"]
+        STORAGE_API["💾 Storage API"]
+        NOTIFY["🔔 Notification API"]
+        
+        APIS --> SPEECH
+        APIS --> STORAGE_API
+        APIS --> NOTIFY
     end
 
-    subgraph "Bibliotecas Externas"
-        GG[Font Awesome - Ícones]
-        HH[Google Fonts - Tipografia]
-    end
-
-    %% Conexões Frontend
-    A --> G
-    A --> H
-    A --> I
-    A --> J
-    A --> K
-    A --> L
-    A --> M
-    A --> N
+    %% Conexões principais
+    UI -.-> LOGIC
+    LOGIC -.-> STORAGE
+    LOGIC -.-> APIS
+    STYLES -.-> UI
     
-    B --> G
-    B --> H
-    B --> I
-    B --> J
-    B --> K
-    B --> L
-    B --> M
-    B --> N
+    %% Estilos das camadas
+    classDef presentation fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef logic fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+    classDef style fill:#e8f5e8,stroke:#388e3c,stroke-width:3px
+    classDef data fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef integration fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+    
+    class UI,MAIN,ACCESS presentation
+    class LOGIC,STANDARD,AI logic
+    class STYLES,CSS1,CSS2 style
+    class STORAGE,LS data
+    class APIS,SPEECH,STORAGE_API,NOTIFY integration
+```
 
-    %% Conexões de Acessibilidade
-    F --> O
-    F --> P
-    F --> Q
-    F --> R
-    F --> S
-    F --> T
+## 🏗️ Arquitetura Detalhada por Módulos
 
-    %% Conexões de Dados
-    E --> U
-    F --> U
-    U --> V
-    U --> W
-    U --> X
-    U --> Y
-    U --> Z
-    U --> AA
-    U --> BB
+```mermaid
+graph LR
+    subgraph "📊 DASHBOARD"
+        D1["📈 Estatísticas"]
+        D2["⚡ Ações Rápidas"]
+        D3["📅 Atividades"]
+    end
 
-    %% Conexões APIs
-    E --> CC
-    F --> DD
-    E --> EE
-    E --> FF
+    subgraph "🔬 EXAMES"
+        E1["📋 Cadastro"]
+        E2["📅 Agendamento"]
+        E3["📊 Histórico"]
+    end
 
-    %% Conexões Externas
-    A --> GG
-    B --> GG
-    A --> HH
-    B --> HH
+    subgraph "💊 MEDICAMENTOS"
+        M1["💉 Dosagens"]
+        M2["⏰ Horários"]
+        M3["👨⚕️ Médicos"]
+    end
+
+    subgraph "💉 VACINAS"
+        V1["📋 Histórico"]
+        V2["📅 Calendário"]
+        V3["🌍 Internacional"]
+    end
+
+    subgraph "🧠 SAÚDE MENTAL"
+        S1["😊 Humor"]
+        S2["🛋️ Terapia"]
+        S3["💡 Dicas"]
+    end
+
+    subgraph "🍎 NUTRIÇÃO"
+        N1["🍽️ Diário"]
+        N2["💧 Água"]
+        N3["📚 Dicas"]
+    end
+
+    subgraph "👨👩👧👦 FAMÍLIA"
+        F1["👥 Membros"]
+        F2["📈 Desenvolvimento"]
+        F3["🚨 Emergência"]
+    end
+
+    subgraph "💾 ARMAZENAMENTO"
+        LS[("🗄️ LocalStorage")]
+    end
+
+    %% Conexões com armazenamento
+    D1 -.-> LS
+    E1 -.-> LS
+    M1 -.-> LS
+    V1 -.-> LS
+    S1 -.-> LS
+    N1 -.-> LS
+    F1 -.-> LS
+
+    %% Estilos dos módulos
+    classDef dashboard fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef health fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef mental fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef nutrition fill:#fff8e1,stroke:#f57c00,stroke-width:2px
+    classDef family fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef storage fill:#f5f5f5,stroke:#424242,stroke-width:2px
+    
+    class D1,D2,D3 dashboard
+    class E1,E2,E3,M1,M2,M3,V1,V2,V3 health
+    class S1,S2,S3 mental
+    class N1,N2,N3 nutrition
+    class F1,F2,F3 family
+    class LS storage
+```
+
+## ♿ Sistema de Acessibilidade IA
+
+```mermaid
+graph TB
+    subgraph "🎛️ PAINEL DE CONTROLE"
+        PANEL["🔧 Accessibility Panel"]
+        TOGGLE["🔘 Toggle Button"]
+        MENU["📋 Options Menu"]
+        
+        TOGGLE --> PANEL
+        PANEL --> MENU
+    end
+
+    subgraph "🎯 MODOS DE ACESSIBILIDADE"
+        CONTRAST["🌓 Alto Contraste"]
+        LARGE["🔍 Texto Grande"]
+        READER["📢 Leitor de Tela"]
+        KEYBOARD["⌨️ Navegação Teclado"]
+        MOTION["⏸️ Reduzir Movimento"]
+        COLOR["🎨 Modo Daltonismo"]
+    end
+
+    subgraph "🎤 ASSISTENTE DE VOZ"
+        VOICE["🎙️ Voice Assistant"]
+        RECOGNITION["👂 Speech Recognition"]
+        SYNTHESIS["🗣️ Speech Synthesis"]
+        COMMANDS["📝 Voice Commands"]
+        
+        VOICE --> RECOGNITION
+        VOICE --> SYNTHESIS
+        RECOGNITION --> COMMANDS
+    end
+
+    subgraph "🔧 APLICAÇÃO DE MUDANÇAS"
+        DOM["🌐 DOM Manipulation"]
+        CSS["🎨 CSS Classes"]
+        ARIA["♿ ARIA Labels"]
+        FOCUS["🎯 Focus Management"]
+        
+        DOM --> CSS
+        DOM --> ARIA
+        DOM --> FOCUS
+    end
+
+    %% Conexões
+    MENU --> CONTRAST
+    MENU --> LARGE
+    MENU --> READER
+    MENU --> KEYBOARD
+    MENU --> MOTION
+    MENU --> COLOR
+
+    CONTRAST --> DOM
+    LARGE --> DOM
+    READER --> DOM
+    KEYBOARD --> DOM
+    MOTION --> DOM
+    COLOR --> DOM
+
+    COMMANDS --> DOM
+    SYNTHESIS --> READER
 
     %% Estilos
-    C --> A
-    D --> B
-    E --> A
-    F --> B
+    classDef control fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef modes fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef voice fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef application fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    
+    class PANEL,TOGGLE,MENU control
+    class CONTRAST,LARGE,READER,KEYBOARD,MOTION,COLOR modes
+    class VOICE,RECOGNITION,SYNTHESIS,COMMANDS voice
+    class DOM,CSS,ARIA,FOCUS application
+```
 
-    classDef frontend fill:#e1f5fe
-    classDef accessibility fill:#f3e5f5
-    classDef storage fill:#e8f5e8
-    classDef api fill:#fff3e0
-    classDef external fill:#fce4ec
+## 🔄 Fluxo de Dados Completo
 
-    class A,B,C,D,E,F frontend
-    class O,P,Q,R,S,T accessibility
-    class U,V,W,X,Y,Z,AA,BB storage
-    class CC,DD,EE,FF api
-    class GG,HH external
+```mermaid
+sequenceDiagram
+    participant U as 👤 Usuário
+    participant UI as 🖥️ Interface
+    participant JS as ⚙️ JavaScript
+    participant LS as 💾 LocalStorage
+    participant API as 🔌 Web APIs
+    participant AI as 🤖 IA Acessibilidade
+
+    Note over U,AI: Fluxo Principal do Sistema
+    
+    U->>UI: 1. Interage com sistema
+    UI->>JS: 2. Dispara evento
+    
+    alt Ação com dados
+        JS->>LS: 3a. Salva/Recupera dados
+        LS-->>JS: 4a. Retorna dados
+    else Ação com API
+        JS->>API: 3b. Chama Web API
+        API-->>JS: 4b. Retorna resultado
+    end
+    
+    JS->>UI: 5. Atualiza interface
+    
+    opt Acessibilidade ativa
+        JS->>AI: 6. Notifica mudança
+        AI->>API: 7. Usa Speech API
+        API-->>AI: 8. Confirma síntese
+        AI-->>U: 9. Feedback sonoro
+    end
+    
+    UI-->>U: 10. Mostra resultado final
 ```
 
 ## 🏛️ Arquitetura Detalhada
@@ -151,26 +285,6 @@ graph TB
 - **WCAG 2.1 AA** compliance
 - **Múltiplos modos** de interação
 
-## 🔄 Fluxo de Dados
-
-```mermaid
-sequenceDiagram
-    participant U as Usuário
-    participant UI as Interface
-    participant JS as JavaScript
-    participant LS as LocalStorage
-    participant API as Web APIs
-
-    U->>UI: Interage com sistema
-    UI->>JS: Dispara evento
-    JS->>LS: Salva/Recupera dados
-    LS-->>JS: Retorna dados
-    JS->>API: Usa APIs nativas
-    API-->>JS: Retorna resultado
-    JS->>UI: Atualiza interface
-    UI-->>U: Mostra resultado
-```
-
 ## 🎯 Padrões Arquiteturais
 
 ### **MVC Pattern**
@@ -187,35 +301,6 @@ sequenceDiagram
 - **Múltiplas estratégias** de acessibilidade
 - **Diferentes modos** de interação
 - **Adaptação dinâmica** às necessidades
-
-## 🔧 Componentes Principais
-
-### **Sistema de Autenticação**
-```mermaid
-graph LR
-    A[Login Form] --> B[Validation]
-    B --> C[User Storage]
-    C --> D[Session Management]
-    D --> E[Dashboard Access]
-```
-
-### **Gerenciamento de Estado**
-```mermaid
-graph LR
-    A[User Action] --> B[Event Handler]
-    B --> C[Data Processing]
-    C --> D[LocalStorage Update]
-    D --> E[UI Refresh]
-```
-
-### **Sistema de Acessibilidade**
-```mermaid
-graph LR
-    A[Accessibility Panel] --> B[Mode Selection]
-    B --> C[DOM Manipulation]
-    C --> D[CSS Classes]
-    D --> E[Enhanced Experience]
-```
 
 ## 📊 Métricas de Performance
 
